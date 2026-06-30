@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #0A0710; }
+  @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes modalIn { from { transform: translateY(18px) scale(.985); } to { transform: none; } }
+  ::selection { background: #FB2576; color: #fff; }
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: #0A0710; }
+  ::-webkit-scrollbar-thumb { background: #2A2235; border-radius: 6px; border: 3px solid #0A0710; }
+  ::-webkit-scrollbar-thumb:hover { background: #3A2F48; }
+
+  /* Reveal moderno por scroll */
+  [data-reveal] {
+    opacity: 0 !important;
+    transform: translateY(32px) !important;
+    will-change: transform, opacity;
+  }
+  [data-reveal].revealed {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+</style>
+<script>
+(function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.02, rootMargin: "0px 0px -5% 0px" });
+
+    function observeAll() {
+      document.querySelectorAll("[data-reveal]:not(.revealed)").forEach(function (el) {
+        observer.observe(el);
+      });
+    }
+
+    observeAll();
+    
+    var mob = new MutationObserver(observeAll);
+    mob.observe(document.body, { childList: true, subtree: true });
+  });
+})();
+</script>
+</helmet>
+
+<div style="font-family: Inter, system-ui, -apple-system, sans-serif; background: #0A0710; color: #F4F1F8; min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative;">
+
+  <!-- Glow ambiental -->
+  <div style="position: absolute; top: -180px; right: -120px; width: 680px; height: 680px; background: radial-gradient(circle, rgba(251,37,118,.16), transparent 62%); pointer-events: none; z-index: 0;"></div>
+  <div style="position: absolute; top: 320px; left: -200px; width: 620px; height: 620px; background: radial-gradient(circle, rgba(123,47,247,.14), transparent 64%); pointer-events: none; z-index: 0;"></div>
+
+  <!-- ============ BARRA DE PROGRESO DE SCROLL ============ -->
+  <div data-progress style="position: fixed; top: 0; left: 0; height: 2px; width: 0%; background: linear-gradient(90deg,#FB2576,#7B2FF7); z-index: 60; box-shadow: 0 0 12px rgba(251,37,118,.6); transition: width .12s linear;"></div>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav data-nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 72px; background: rgba(10,7,16,.72); backdrop-filter: saturate(160%) blur(16px); -webkit-backdrop-filter: saturate(160%) blur(16px); border-bottom: 1px solid rgba(255,255,255,.07); display: flex; align-items: center; transition: transform .45s cubic-bezier(.16,1,.3,1), height .35s ease, background .35s ease, box-shadow .35s ease, border-color .35s ease;">
+    <div style="width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="#inicio" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: flex; align-items: center; gap: 11px; text-decoration: none; color: #F4F1F8;">
+        <span style="display: inline-block; padding: 2px; border-radius: 50%; background: linear-gradient(135deg,#FB2576,#7B2FF7);">
+          <img src="assets/ignacio.png" alt="Ignacio Díaz" style="display: block; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: center 18%; border: 2px solid #0A0710;">
+        </span>
+        <span style="font-weight: 700; font-size: 16px; letter-spacing: -.3px;">Ignacio Díaz</span>
+      </a>
+
+      <!-- Enlaces (desktop) con indicador deslizante -->
+      <div data-navlinks style="position: relative; display: flex; align-items: center; gap: 2px;">
+        <a data-navlink href="#inicio" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; color: #fff; font-size: 14px; font-weight: 500; padding: 9px 14px; border-radius: 9px; transition: color .25s;" style-hover="color: #fff;">Inicio</a>
+        <a data-navlink href="#sobre-mi" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; color: #A39BB0; font-size: 14px; font-weight: 500; padding: 9px 14px; border-radius: 9px; transition: color .25s;" style-hover="color: #fff;">Sobre mí</a>
+        <a data-navlink href="#experiencia" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; color: #A39BB0; font-size: 14px; font-weight: 500; padding: 9px 14px; border-radius: 9px; transition: color .25s;" style-hover="color: #fff;">Experiencia</a>
+        <a data-navlink href="#contacto" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; color: #A39BB0; font-size: 14px; font-weight: 500; padding: 9px 14px; border-radius: 9px; transition: color .25s;" style-hover="color: #fff;">Contacto</a>
+        <span data-underline style="position: absolute; bottom: 2px; left: 14px; width: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg,#FB2576,#7B2FF7); pointer-events: none; transition: left .38s cubic-bezier(.16,1,.3,1), width .38s cubic-bezier(.16,1,.3,1);"></span>
+      </div>
+
+      <!-- Acciones -->
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <!-- Botón de Mute/Unmute Sonidos -->
+        <button onClick="{{ toggleSound }}" onMouseEnter="{{ playHover }}" aria-label="{{ soundEnabled ? 'Silenciar sonidos' : 'Activar sonidos' }}" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); color: #F4F1F8; border-radius: 10px; cursor: pointer; transition: background .25s, border-color .25s, transform .2s;" style-hover="background: rgba(255,255,255,.08); border-color: rgba(251,37,118,.5); transform: scale(1.05);">
+          <sc-if value="{{ soundEnabled }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </sc-if>
+          <sc-if value="{{ !soundEnabled }}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+          </sc-if>
+        </button>
+
+        <a href="#contacto" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(120deg,#FB2576,#7B2FF7); color: #fff; font-size: 14px; font-weight: 600; padding: 10px 18px; border-radius: 10px; transition: transform .2s, box-shadow .2s, filter .2s;" style-hover="filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 10px 26px rgba(251,37,118,.36);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Descargar CV
+        </a>
+        <button onClick="{{ openMenu }}" onMouseEnter="{{ playHover }}" aria-label="Abrir menú" style="display: inline-flex; align-items: center; gap: 11px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); color: #F4F1F8; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: .3px; padding: 10px 15px 10px 17px; border-radius: 10px; cursor: pointer; transition: background .25s, border-color .25s;" style-hover="background: rgba(255,255,255,.08); border-color: rgba(251,37,118,.5);">
+          Menú
+          <span style="display: inline-flex; flex-direction: column; gap: 4px; width: 18px;">
+            <span style="height: 2px; width: 18px; background: currentColor; border-radius: 2px;"></span>
+            <span style="height: 2px; width: 11px; background: currentColor; border-radius: 2px; align-self: flex-end;"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header id="inicio" style="position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; padding: 120px 32px 72px;">
+    <div style="width: 100%; max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 60px;">
+
+      <!-- Texto -->
+      <div style="flex: 1 1 440px; min-width: 320px;">
+        <div data-reveal style="transform: translateY(20px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: rgba(255,255,255,.03); font-size: 13px; font-weight: 600; color: #F0A6C8; margin-bottom: 30px;">
+          <span style="width: 7px; height: 7px; border-radius: 999px; background: #FB2576; box-shadow: 0 0 0 4px rgba(251,37,118,.22);"></span>
+          Disponible para nuevos proyectos
+        </div>
+        <h1 data-reveal style="transform: translateY(20px); transition: opacity .7s cubic-bezier(.16,1,.3,1) .06s, transform .7s cubic-bezier(.16,1,.3,1) .06s; font-size: clamp(48px, 7.2vw, 92px); font-weight: 800; line-height: .95; letter-spacing: -3px; margin: 0 0 24px; background: linear-gradient(120deg,#FFFFFF 0%,#FFD9E8 35%,#D9B6FF 70%,#B98CFF 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">Ignacio<br>Díaz</h1>
+        <p data-reveal style="transform: translateY(20px); transition: opacity .7s cubic-bezier(.16,1,.3,1) .12s, transform .7s cubic-bezier(.16,1,.3,1) .12s; font-size: clamp(19px, 2.3vw, 25px); font-weight: 600; line-height: 1.35; letter-spacing: -.5px; margin: 0 0 18px; color: #D8D2E2; max-width: 560px;">
+          Senior Full-Stack &amp; UI/UX Developer <span style="color: #5A5366;">·</span> <span style="background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; font-weight: 700;">Angular lover</span>
+        </p>
+        <div data-reveal style="transform: translateY(20px); transition: opacity .7s cubic-bezier(.16,1,.3,1) .18s, transform .7s cubic-bezier(.16,1,.3,1) .18s; display: flex; align-items: center; gap: 8px; color: #8B8398; font-size: 15px; font-weight: 500; margin-bottom: 40px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          Santiago, Chile
+        </div>
+        <div data-reveal style="transform: translateY(20px); transition: opacity .7s cubic-bezier(.16,1,.3,1) .24s, transform .7s cubic-bezier(.16,1,.3,1) .24s; display: flex; flex-wrap: wrap; gap: 14px;">
+          <a href="#experiencia" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(120deg,#FB2576,#7B2FF7); color: #fff; font-size: 15px; font-weight: 600; padding: 15px 28px; border-radius: 12px; transition: transform .25s, box-shadow .25s, filter .25s;" style-hover="filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 16px 34px rgba(251,37,118,.4);">
+            Ver experiencia
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#contacto" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.04); color: #F4F1F8; font-size: 15px; font-weight: 600; padding: 15px 28px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); transition: transform .25s, border-color .25s, background .25s;" style-hover="border-color: rgba(251,37,118,.7); background: rgba(251,37,118,.08); transform: translateY(-2px);">Contactar</a>
+        </div>
+      </div>
+
+      <!-- Foto -->
+      <div data-reveal style="transform: translateY(20px); transition: opacity .8s cubic-bezier(.16,1,.3,1) .2s, transform .8s cubic-bezier(.16,1,.3,1) .2s; flex: 0 1 400px; min-width: 280px; position: relative;">
+        <div style="position: absolute; inset: -14px; border-radius: 32px; background: linear-gradient(135deg,#FB2576,#7B2FF7); filter: blur(38px); opacity: .45;"></div>
+        <div style="position: relative; border-radius: 26px; padding: 3px; background: linear-gradient(135deg,#FB2576,#7B2FF7);">
+          <div style="border-radius: 23px; overflow: hidden; background: #0A0710;">
+            <img src="assets/ignacio.png" alt="Ignacio Díaz" style="display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center 15%;">
+          </div>
+        </div>
+        <div style="position: absolute; bottom: 20px; left: -26px; background: #130E1C; border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 14px 18px; box-shadow: 0 20px 44px rgba(0,0,0,.5); animation: floatY 5s ease-in-out infinite;">
+          <div style="font-size: 26px; font-weight: 800; letter-spacing: -1px; line-height: 1; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">+10 años</div>
+          <div style="font-size: 12px; font-weight: 500; color: #8B8398; margin-top: 4px;">construyendo software</div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============ SOBRE MÍ ============ -->
+  <section id="sobre-mi" style="position: relative; z-index: 1; padding: 96px 32px; background: #0D0915; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06);">
+    <div style="max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 56px;">
+      <div data-reveal style="transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); flex: 0 0 220px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">Sobre mí</div>
+        <div style="width: 44px; height: 3px; background: linear-gradient(90deg,#FB2576,#7B2FF7); border-radius: 999px; margin-top: 14px;"></div>
+      </div>
+      <p data-reveal style="transform: translateY(26px); transition: opacity .8s cubic-bezier(.16,1,.3,1) .1s, transform .8s cubic-bezier(.16,1,.3,1) .1s; margin: 0; font-size: clamp(20px, 2.3vw, 27px); line-height: 1.55; font-weight: 500; letter-spacing: -.4px; color: #C7C0D2; text-wrap: pretty; flex: 1 1 460px; min-width: 320px;">
+        Desarrollador full-stack y diseñador UI/UX con más de <strong style="color: #fff; font-weight: 700;">10 años</strong> construyendo productos digitales sólidos. He liderado equipos y entregado soluciones en <strong style="color: #fff; font-weight: 700;">fintech, banca y proyectos SaaS</strong>, combinando una arquitectura técnica robusta con interfaces cuidadas y centradas en el usuario. Especializado en el ecosistema <strong style="color: #fff; font-weight: 700;">Angular</strong>, disfruto traducir problemas complejos de negocio en experiencias claras, escalables y elegantes.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCIA ============ -->
+  <section id="experiencia" style="position: relative; z-index: 1; padding: 96px 32px 110px;">
+    <div style="max-width: 920px; margin: 0 auto;">
+      <div data-reveal style="transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); margin-bottom: 56px; max-width: 660px;">
+        <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 16px;">Trayectoria</div>
+        <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 16px; line-height: 1; color: #fff;">Experiencia Profesional</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #8B8398;">Quince roles ordenados del más reciente al más antiguo. Arrastra una imagen sobre cada punto para añadir el logo, o haz clic en una tarjeta para ver el detalle completo.</p>
+      </div>
+
+      <div style="position: relative;">
+        <div style="position: absolute; left: 31px; top: 32px; bottom: 40px; width: 2px; background: linear-gradient(#FB2576, #7B2FF7); border-radius: 2px; opacity: .55;"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 26px;">
+          <sc-for list="{{ experiences }}" as="job" hint-placeholder-count="6">
+            <div data-reveal style="transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); display: flex; gap: 26px; position: relative;">
+              <!-- Nodo / logo -->
+              <div style="position: relative; z-index: 1; flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; padding: 2px; background: linear-gradient(135deg,#FB2576,#7B2FF7); box-shadow: 0 0 0 5px #0A0710;">
+                <div style="position: relative; width: 100%; height: 100%; border-radius: 50%; background: #15101E; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                  <span style="position: absolute; font-size: 21px; font-weight: 800; color: #fff; opacity: .92;">{{ job.initial }}</span>
+                  <image-slot id="{{ job.slotId }}" shape="circle" fit="cover" placeholder=" " style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;"></image-slot>
+                </div>
+              </div>
+
+              <!-- Tarjeta -->
+              <article onClick="{{ job.open }}" onMouseEnter="{{ playHover }}" style="position: relative; overflow: hidden; flex: 1; min-width: 0; background: #15101E; border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 24px 26px; cursor: pointer; transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;" style-hover="transform: translateY(-3px); box-shadow: 0 24px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(251,37,118,.25); border-color: rgba(251,37,118,.55);">
+                <div style="position: absolute; top: 12px; right: 22px; font-size: 50px; font-weight: 900; letter-spacing: -2px; color: rgba(255,255,255,.05); line-height: 1; pointer-events: none; user-select: none;">{{ job.num }}</div>
+
+                <div style="display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: #A39BB0; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); padding: 5px 11px; border-radius: 999px; margin-bottom: 14px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  {{ job.dates }} <span style="color: #5A5366;">·</span> {{ job.duration }}
+                </div>
+
+                <h3 style="margin: 0 0 4px; font-size: 19px; font-weight: 700; letter-spacing: -.4px; line-height: 1.25; color: #fff; padding-right: 40px;">{{ job.title }}</h3>
+                <div style="font-size: 14.5px; font-weight: 600; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 14px; display: inline-block;">{{ job.company }}</div>
+
+                <p style="margin: 0 0 16px; font-size: 14.5px; line-height: 1.6; color: #9A93A6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ job.description }}</p>
+
+                <sc-if value="{{ showTechStack }}" hint-placeholder-val="{{ true }}">
+                  <div style="display: flex; flex-wrap: wrap; gap: 7px;">
+                    <sc-for list="{{ job.tech }}" as="t" hint-placeholder-count="3">
+                      <span style="font-size: 11.5px; font-weight: 600; color: #C7C0D2; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); padding: 4px 10px; border-radius: 999px;">{{ t }}</span>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </article>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="contacto" style="position: relative; z-index: 1; background: #0D0915; border-top: 1px solid rgba(255,255,255,.07); padding: 84px 32px 40px;">
+    <div style="max-width: 1180px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1);">
+        <div>
+          <h2 style="font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 16px; line-height: 1.05; color: #fff;">Construyamos algo<br><span style="background: linear-gradient(120deg,#FB2576,#7B2FF7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;">excepcional juntos.</span></h2>
+          <a href="mailto:ignacio.diaz@email.com" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; gap: 10px; color: #D8D2E2; text-decoration: none; font-size: 18px; font-weight: 600; transition: color .2s;" style-hover="color: #fff;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            ignacio.diaz@email.com
+          </a>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="#" title="LinkedIn" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,.16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;" style-hover="background: linear-gradient(120deg,#FB2576,#7B2FF7); border-color: transparent; transform: translateY(-2px);">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path></svg>
+          </a>
+          <a href="#" title="GitHub" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,.16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;" style-hover="background: linear-gradient(120deg,#FB2576,#7B2FF7); border-color: transparent; transform: translateY(-2px);">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path></svg>
+          </a>
+          <a href="mailto:ignacio.diaz@email.com" title="Email" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,.16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;" style-hover="background: linear-gradient(120deg,#FB2576,#7B2FF7); border-color: transparent; transform: translateY(-2px);">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </a>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 28px; color: #6E6678; font-size: 13px; font-weight: 500;">
+        <div>© {{ year }} Ignacio Díaz · Senior Full-Stack &amp; UI/UX Developer</div>
+        <div>Santiago, Chile</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ MENÚ OVERLAY (pantalla completa) ============ -->
+  <div id="menu-overlay" style="{{ menuStyle }}">
+    <!-- Glows -->
+    <div style="position: absolute; top: -160px; right: -120px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(251,37,118,.18), transparent 62%); pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -200px; left: -160px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(123,47,247,.18), transparent 64%); pointer-events: none;"></div>
+
+    <!-- Barra superior del overlay -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 72px; z-index: 2;">
+      <div style="max-width: 1180px; margin: 0 auto; height: 100%; padding: 0 32px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 11px;">
+          <span style="display: inline-block; padding: 2px; border-radius: 50%; background: linear-gradient(135deg,#FB2576,#7B2FF7);">
+            <img src="assets/ignacio.png" alt="Ignacio Díaz" style="display: block; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; object-position: center 18%; border: 2px solid #08050D;">
+          </span>
+          <span style="font-weight: 700; font-size: 16px; letter-spacing: -.3px; color: #fff;">Ignacio Díaz</span>
+        </div>
+        <button onClick="{{ closeMenu }}" onMouseEnter="{{ playHover }}" aria-label="Cerrar menú" style="display: inline-flex; align-items: center; gap: 11px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12); color: #F4F1F8; font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: .3px; padding: 10px 15px 10px 17px; border-radius: 10px; cursor: pointer; transition: background .25s, border-color .25s;" style-hover="background: rgba(255,255,255,.08); border-color: rgba(251,37,118,.5);">
+          Cerrar
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenido -->
+    <div style="position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; height: 100%; padding: 110px 32px 56px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: flex; flex-wrap: wrap; gap: 56px 80px; align-items: flex-end; justify-content: space-between;">
+
+        <!-- Enlaces grandes -->
+        <nav style="display: flex; flex-direction: column; gap: 2px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #6E6678; margin-bottom: 22px;">Navegación</span>
+          <sc-for list="{{ menuLinks }}" as="lnk" hint-placeholder-count="4">
+            <a data-menu-link href="{{ lnk.href }}" onClick="{{ closeMenu }}" onMouseEnter="{{ playHover }}" style="{{ lnk.style }}" style-hover="color: #fff;">
+              <span style="font-size: clamp(13px, 1.3vw, 16px); font-weight: 700; letter-spacing: 0; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; align-self: flex-start; padding-top: 6px;">{{ lnk.num }}</span>
+              {{ lnk.label }}
+            </a>
+          </sc-for>
+        </nav>
+
+        <!-- Panel de contacto -->
+        <div data-menu-panel style="{{ menuPanelStyle }}">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #6E6678; margin-bottom: 14px;">Contacto</div>
+            <a href="mailto:ignacio.diaz@email.com" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="color: #fff; text-decoration: none; font-size: 18px; font-weight: 600; transition: color .2s;" style-hover="color: #F0A6C8;">ignacio.diaz@email.com</a>
+            <div style="color: #8B8398; font-size: 14px; font-weight: 500; margin-top: 8px;">Santiago, Chile</div>
+          </div>
+          <div>
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #6E6678; margin-bottom: 14px;">Redes</div>
+            <div style="display: flex; gap: 10px;">
+              <a href="#" title="LinkedIn" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 11px; border: 1px solid rgba(255,255,255,.16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;" style-hover="background: linear-gradient(120deg,#FB2576,#7B2FF7); border-color: transparent; transform: translateY(-2px);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path></svg>
+              </a>
+              <a href="#" title="GitHub" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 11px; border: 1px solid rgba(255,255,255,.16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;" style-hover="background: linear-gradient(120deg,#FB2576,#7B2FF7); border-color: transparent; transform: translateY(-2px);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"></path></svg>
+              </a>
+              <a href="mailto:ignacio.diaz@email.com" title="Email" onMouseEnter="{{ playHover }}" onClick="{{ playClick }}" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 11px; border: 1px solid rgba(255,255,255,.16); color: #fff; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;" style-hover="background: linear-gradient(120deg,#FB2576,#7B2FF7); border-color: transparent; transform: translateY(-2px);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: rgba(255,255,255,.03); font-size: 13px; font-weight: 600; color: #F0A6C8; align-self: flex-start;">
+            <span style="width: 7px; height: 7px; border-radius: 999px; background: #FB2576; box-shadow: 0 0 0 4px rgba(251,37,118,.22);"></span>
+            Disponible para nuevos proyectos
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MODAL ============ -->
+  <sc-if value="{{ selected }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(5,3,9,.72); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; padding: 24px;">
+      <div onClick="{{ stop }}" style="background: #15101E; border: 1px solid rgba(255,255,255,.1); border-radius: 22px; max-width: 620px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: 0 50px 100px rgba(0,0,0,.6); animation: modalIn .3s cubic-bezier(.2,.8,.2,1);">
+        <div style="padding: 32px 32px 24px; border-bottom: 1px solid rgba(255,255,255,.08); position: relative;">
+          <button onClick="{{ closeModal }}" onMouseEnter="{{ playHover }}" aria-label="Cerrar" style="position: absolute; top: 24px; right: 24px; width: 38px; height: 38px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.03); color: #A39BB0; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s;" style-hover="background: rgba(255,255,255,.08); color: #fff;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+          <div style="display: flex; align-items: center; gap: 16px; padding-right: 48px;">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 15px; background: linear-gradient(135deg,#FB2576,#7B2FF7); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; letter-spacing: -.5px; box-shadow: 0 10px 26px rgba(251,37,118,.35);">{{ selected.initial }}</div>
+            <div>
+              <h3 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; letter-spacing: -.6px; color: #fff;">{{ selected.title }}</h3>
+              <div style="font-size: 15px; font-weight: 600; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block;">{{ selected.company }}</div>
+            </div>
+          </div>
+        </div>
+        <div style="padding: 28px 32px 34px;">
+          <div style="display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 24px; font-size: 13.5px; font-weight: 500; color: #8B8398;">
+            <span style="display: inline-flex; align-items: center; gap: 7px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              {{ selected.dates }}
+            </span>
+            <span style="display: inline-flex; align-items: center; gap: 7px;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              {{ selected.duration }}
+            </span>
+          </div>
+          <p style="margin: 0 0 28px; font-size: 16px; line-height: 1.7; color: #C7C0D2; text-wrap: pretty;">{{ selected.description }}</p>
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6E6678; margin-bottom: 12px;">Tech Stack</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{ selected.tech }}" as="t" hint-placeholder-count="4">
+              <span style="font-size: 13px; font-weight: 600; color: #F0DCEC; background: rgba(251,37,118,.1); border: 1px solid rgba(251,37,118,.28); padding: 6px 13px; border-radius: 999px;">{{ t }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: 900 },
+  &quot;showTechStack&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Experiencia&quot; }
+}">
+class ElegantAudioManager {
+  static ctx = null;
+  static masterGain = null;
+  static enabled = (() => {
+    try {
+      return localStorage.getItem("sound_enabled") !== "false";
+    } catch (e) {
+      return true;
+    }
+  })();
+
+  static init() {
+    if (this.ctx) return;
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioContext();
+      this.masterGain = this.ctx.createGain();
+      this.masterGain.gain.setValueAtTime(0.08, this.ctx.currentTime); // Soft volume cap
+      this.masterGain.connect(this.ctx.destination);
+    } catch (e) {
+      console.warn("Web Audio API not supported:", e);
+    }
+  }
+
+  static toggle(state) {
+    this.enabled = state !== undefined ? state : !this.enabled;
+    try {
+      localStorage.setItem("sound_enabled", this.enabled);
+    } catch (e) {}
+    return this.enabled;
+  }
+
+  static play(type) {
+    if (!this.enabled) return;
+    this.init();
+    if (!this.ctx) return;
+    
+    if (this.ctx.state === "suspended") {
+      this.ctx.resume();
+    }
+
+    const now = this.ctx.currentTime;
+
+    if (type === "hover") {
+      // Elegant, extremely soft chime tick
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(1400, now);
+      
+      gain.gain.setValueAtTime(0.0, now);
+      gain.gain.linearRampToValueAtTime(0.12, now + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+      
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+      
+      osc.start(now);
+      osc.stop(now + 0.05);
+    } 
+    else if (type === "click") {
+      // A warm, elegant harmonic chime (Mi5 + Sol5 + Do6 major chord triad)
+      const frequencies = [659.25, 783.99, 1046.50];
+      frequencies.forEach((freq, index) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, now + index * 0.015);
+        
+        gain.gain.setValueAtTime(0.0, now);
+        gain.gain.linearRampToValueAtTime(0.15, now + 0.01 + index * 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22 + index * 0.015);
+        
+        osc.connect(gain);
+        gain.connect(this.masterGain);
+        
+        osc.start(now + index * 0.015);
+        osc.stop(now + 0.3);
+      });
+    }
+    else if (type === "slide-open") {
+      // Gentle triangle pitch slide whoosh
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(160, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.15);
+      
+      gain.gain.setValueAtTime(0.0, now);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.03);
+      gain.gain.linearRampToValueAtTime(0.0, now + 0.15);
+      
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+      
+      osc.start(now);
+      osc.stop(now + 0.16);
+    }
+    else if (type === "slide-close") {
+      // Gentle reverse whoosh
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(320, now);
+      osc.frequency.exponentialRampToValueAtTime(160, now + 0.15);
+      
+      gain.gain.setValueAtTime(0.0, now);
+      gain.gain.linearRampToValueAtTime(0.2, now + 0.03);
+      gain.gain.linearRampToValueAtTime(0.0, now + 0.15);
+      
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+      
+      osc.start(now);
+      osc.stop(now + 0.16);
+    }
+  }
+}
+
+class Component extends DCLogic {
+  state = {
+    selected: null,
+    menuOpen: false,
+    soundEnabled: ElegantAudioManager.enabled
+  };
+
+  // ---- 15 trabajos, del más reciente al más antiguo ----
+  jobs = [
+    { title: "Desarrollador FullStack", company: "Ideatech", dates: "dic. 2025 – feb. 2026", duration: "3 meses", isDesign: false,
+      description: "Desarrollo de soluciones full-stack para plataformas fintech de alto rendimiento. Implementación de microservicios, APIs REST seguras e interfaces responsivas, colaborando estrechamente con equipos de producto para entregar funcionalidades críticas en ciclos ágiles.",
+      tech: ["Angular", "Node.js", "TypeScript", "PostgreSQL"] },
+    { title: "Líder de Desarrollo Full-Stack", company: "FleetMaster", dates: "feb. 2025 – nov. 2025", duration: "10 meses", isDesign: false,
+      description: "Liderazgo técnico de un equipo full-stack en el desarrollo de una plataforma SaaS de gestión de flotas. Definición de la arquitectura, estándares de código y procesos de CI/CD, junto con mentoría a desarrolladores y coordinación directa con stakeholders del negocio.",
+      tech: ["Angular", "NestJS", "AWS", "Docker", "CI/CD"] },
+    { title: "Desarrollador Front-end", company: "Imagemaker", dates: "sept. 2025 – ene. 2026", duration: "5 meses", isDesign: false,
+      description: "Desarrollo front-end para productos de banca digital con foco en rendimiento y accesibilidad. Construcción de componentes reutilizables y consumo de APIs en arquitecturas escalables, asegurando una experiencia fluida y consistente en todos los dispositivos.",
+      tech: ["Angular", "RxJS", "SCSS", "Jest"] },
+    { title: "Desarrollador Front-end", company: "Orbis Data", dates: "jun. 2024 – ago. 2024", duration: "3 meses", isDesign: false,
+      description: "Implementación de interfaces de visualización de datos complejas para dashboards analíticos. Optimización del rendimiento de renderizado y traducción de requerimientos de negocio en componentes claros e intuitivos.",
+      tech: ["React", "D3.js", "TypeScript"] },
+    { title: "Diseñador UI/UX", company: "BC Tecnología", dates: "nov. 2022 – oct. 2023", duration: "1 año", isDesign: true,
+      description: "Diseño de experiencias de usuario para productos bancarios y financieros. Investigación con usuarios, prototipado de alta fidelidad y definición de un sistema de diseño consistente, en colaboración constante con los equipos de desarrollo.",
+      tech: ["Figma", "UX Research", "Design System"] },
+    { title: "Diseñador UI/UX", company: "BC Tecnología", dates: "jun. 2023 – ago. 2023", duration: "3 meses", isDesign: true,
+      description: "Diseño de interfaces y flujos para nuevas funcionalidades de productos digitales. Creación de wireframes, prototipos interactivos y entrega de assets listos para desarrollo, cuidando la coherencia visual del producto.",
+      tech: ["Figma", "Prototyping", "UI Design"] },
+    { title: "Analista de software", company: "Grupo MOK", dates: "abr. 2022 – ago. 2022", duration: "5 meses", isDesign: false,
+      description: "Análisis funcional y técnico de software, levantamiento de requerimientos y documentación de procesos. Coordinación entre las áreas de negocio y desarrollo para asegurar la calidad y el alcance correcto de las entregas.",
+      tech: ["SQL", "UML", "Documentación"] },
+    { title: "Desarrollador Full-Stack", company: "BC Tecnología", dates: "may. 2021 – feb. 2022", duration: "10 meses", isDesign: false,
+      description: "Desarrollo full-stack de aplicaciones empresariales, abarcando back-end, front-end e integración de servicios. Implementación de nuevas funcionalidades y mantenimiento de sistemas en producción para clientes corporativos.",
+      tech: ["Java", "Angular", "REST APIs"] },
+    { title: "Desarrollador Front-end (React Native)", company: "Walmart Chile", dates: "abr. 2019 – jul. 2019", duration: "4 meses", isDesign: false,
+      description: "Desarrollo de aplicaciones móviles con React Native para el ecosistema retail. Integración con servicios backend y optimización de la experiencia móvil para una base de miles de usuarios.",
+      tech: ["React Native", "JavaScript", "Redux"] },
+    { title: "Desarrollador front-end", company: "Cursor S.A.", dates: "dic. 2015 – mar. 2016", duration: "4 meses", isDesign: false,
+      description: "Desarrollo front-end de sitios y aplicaciones web, maquetación responsiva y consumo de APIs. Trabajo colaborativo bajo metodologías ágiles para entregar interfaces sólidas y mantenibles.",
+      tech: ["HTML", "CSS", "JavaScript", "jQuery"] },
+    { title: "Desarrollador de WordPress", company: "BLANCO ESTUDIO", dates: "oct. 2015 – dic. 2015", duration: "3 meses", isDesign: false,
+      description: "Desarrollo y personalización de sitios en WordPress, creación de temas a medida y optimización de rendimiento para clientes corporativos.",
+      tech: ["WordPress", "PHP", "CSS"] },
+    { title: "Desarrollador de WordPress", company: "RAYA", dates: "jul. 2015 – sept. 2015", duration: "3 meses", isDesign: false,
+      description: "Construcción de sitios web en WordPress, integración de plugins y maquetación pixel-perfect a partir de diseños entregados por el equipo creativo.",
+      tech: ["WordPress", "PHP", "HTML"] },
+    { title: "Desarrollador Angular", company: "Toteat", dates: "mar. 2015 – jun. 2015", duration: "4 meses", isDesign: false,
+      description: "Desarrollo de funcionalidades en Angular para una plataforma de gestión gastronómica. Implementación de vistas dinámicas e integración con APIs para optimizar la operación de los locales.",
+      tech: ["Angular", "TypeScript", "REST"] },
+    { title: "Diseñador y Desarrollador Web", company: "TMN Consultores", dates: "mar. 2014 – abr. 2014", duration: "2 meses", isDesign: false,
+      description: "Diseño y desarrollo de sitios web corporativos, desde la conceptualización visual hasta la implementación front-end, cuidando la identidad de marca de cada cliente.",
+      tech: ["HTML", "CSS", "WordPress"] },
+    { title: "Práctica profesional", company: "Advante Digital", dates: "ene. 2014 – mar. 2014", duration: "3 meses", isDesign: false,
+      description: "Práctica profesional en desarrollo y diseño web. Apoyo en maquetación, desarrollo front-end y tareas de diseño bajo la supervisión del equipo senior, dando los primeros pasos en proyectos reales.",
+      tech: ["HTML", "CSS", "JavaScript"] }
+  ];
+
+  componentDidMount() {
+    this._onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this._raf = null; this._updateScroll(); });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    window.addEventListener("resize", this._onScroll, { passive: true });
+    this._si = setInterval(() => this._updateScroll(), 500);
+    this._updateScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._onScroll);
+    window.removeEventListener("resize", this._onScroll);
+    clearInterval(this._si);
+    document.body.style.overflow = "";
+  }
+
+  componentDidUpdate() {
+    this._syncLock();
+  }
+
+  _syncLock() {
+    const open = !!this.state.selected || !!this.state.menuOpen;
+    if (open !== this._lock) {
+      this._lock = open;
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+  }
+
+  _updateScroll() {
+    const se = document.scrollingElement || document.documentElement;
+    const top = se.scrollTop || window.scrollY || 0;
+    const max = (se.scrollHeight - se.clientHeight) || 1;
+    const pb = document.querySelector("[data-progress]");
+    if (pb) pb.style.width = Math.max(0, Math.min(100, (top / max) * 100)).toFixed(2) + "%";
+
+    // Ocultar al bajar, mostrar al subir, encoger al scrollear
+    const nav = document.querySelector("[data-nav]");
+    if (nav) {
+      const down = top > (this._lastTop || 0) && top > 160;
+      nav.style.transform = down && !this.state.menuOpen ? "translateY(-105%)" : "none";
+      
+      // Efecto shrinking header y shadow
+      if (top > 20) {
+        nav.style.height = "60px";
+        nav.style.background = "rgba(10, 7, 16, 0.88)";
+        nav.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.3)";
+        nav.style.borderColor = "rgba(255, 255, 255, 0.08)";
+      } else {
+        nav.style.height = "72px";
+        nav.style.background = "rgba(10, 7, 16, 0.72)";
+        nav.style.boxShadow = "none";
+        nav.style.borderColor = "rgba(255, 255, 255, 0.07)";
+      }
+    }
+    this._lastTop = top;
+
+    // Scroll-spy
+    const ids = ["inicio", "sobre-mi", "experiencia", "contacto"];
+    let active = ids[0];
+    for (const id of ids) {
+      const s = document.getElementById(id);
+      if (s && s.getBoundingClientRect().top <= 110) active = id;
+    }
+    if (active !== this._activeId) { this._activeId = active; this._syncIndicator(active); }
+  }
+
+  _syncIndicator(active) {
+    const wrap = document.querySelector("[data-navlinks]");
+    if (!wrap) return;
+    let activeEl = null;
+    wrap.querySelectorAll("[data-navlink]").forEach((el) => {
+      const on = el.getAttribute("href") === "#" + active;
+      el.style.color = on ? "#fff" : "#A39BB0";
+      if (on) activeEl = el;
+    });
+    const u = wrap.querySelector("[data-underline]");
+    if (u && activeEl) { u.style.left = activeEl.offsetLeft + "px"; u.style.width = activeEl.offsetWidth + "px"; }
+  }
+
+  _setMenu(open) {
+    const ov = document.getElementById("menu-overlay");
+    this._menuOpen = open;
+    if (ov) {
+      const links = ov.querySelectorAll("[data-menu-link]");
+      const panel = ov.querySelector("[data-menu-panel]");
+      if (open) {
+        ov.style.visibility = "visible";
+        ov.style.opacity = "1";
+        ov.style.pointerEvents = "auto";
+        links.forEach((el, i) => { el.style.transitionDelay = (0.14 + i * 0.07) + "s"; el.style.opacity = "1"; el.style.transform = "none"; });
+        if (panel) { panel.style.transitionDelay = "0.34s"; panel.style.opacity = "1"; panel.style.transform = "none"; }
+      } else {
+        ov.style.opacity = "0";
+        ov.style.pointerEvents = "none";
+        links.forEach((el) => { el.style.transitionDelay = "0s"; el.style.opacity = "0"; el.style.transform = "translateY(38px)"; });
+        if (panel) { panel.style.transitionDelay = "0s"; panel.style.opacity = "0"; panel.style.transform = "translateY(20px)"; }
+        setTimeout(() => { if (!this._menuOpen) ov.style.visibility = "hidden"; }, 520);
+      }
+    }
+    this._syncLock();
+  }
+
+  renderVals() {
+    const showTechStack = this.props.showTechStack ?? true;
+    const mOpen = this.state.menuOpen;
+    const soundEnabled = this.state.soundEnabled;
+    return {
+      year: new Date().getFullYear(),
+      showTechStack,
+      soundEnabled,
+      menuLinks: [
+        { num: "01", label: "Inicio", href: "#inicio" },
+        { num: "02", label: "Sobre mí", href: "#sobre-mi" },
+        { num: "03", label: "Experiencia", href: "#experiencia" },
+        { num: "04", label: "Contacto", href: "#contacto" }
+      ].map((l, i) => ({ ...l, style: "display:inline-flex;align-items:baseline;gap:16px;text-decoration:none;font-weight:800;letter-spacing:-2px;line-height:1.16;font-size:clamp(38px,7vw,78px);color:#7C7488;transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1),color .25s;" + (mOpen ? ("opacity:1;transform:none;transition-delay:" + (0.14 + i * 0.07).toFixed(2) + "s;") : "opacity:0;transform:translateY(38px);transition-delay:0s;") })),
+      menuStyle: "position:fixed;inset:0;z-index:200;background:rgba(8,5,13,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);overflow:hidden;transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1),visibility .5s ease;" + (mOpen ? "visibility:visible;opacity:1;transform:scale(1);pointer-events:auto;" : "visibility:hidden;opacity:0;transform:scale(1.05);pointer-events:none;"),
+      menuPanelStyle: "display:flex;flex-direction:column;gap:28px;max-width:300px;transition:opacity .6s cubic-bezier(.16,1,.3,1) .34s,transform .6s cubic-bezier(.16,1,.3,1) .34s;" + (mOpen ? "opacity:1;transform:none;" : "opacity:0;transform:translateY(20px);"),
+      openMenu: () => {
+        ElegantAudioManager.play("slide-open");
+        this.setState({ menuOpen: true });
+      },
+      closeMenu: () => {
+        ElegantAudioManager.play("slide-close");
+        this.setState({ menuOpen: false });
+      },
+      toggleSound: () => {
+        const enabled = ElegantAudioManager.toggle();
+        this.setState({ soundEnabled: enabled });
+        if (enabled) {
+          ElegantAudioManager.play("click");
+        }
+      },
+      experiences: this.jobs.map((job, i) => ({
+        ...job,
+        num: String(i + 1).padStart(2, "0"),
+        initial: job.company.charAt(0),
+        slotId: "logo-" + i,
+        open: () => {
+          ElegantAudioManager.play("click");
+          this.setState({ selected: { ...job, initial: job.company.charAt(0) } });
+        }
+      })),
+      selected: this.state.selected,
+      closeModal: () => {
+        ElegantAudioManager.play("slide-close");
+        this.setState({ selected: null });
+      },
+      stop: (e) => e.stopPropagation(),
+      playHover: () => {
+        ElegantAudioManager.play("hover");
+      },
+      playClick: () => {
+        ElegantAudioManager.play("click");
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
