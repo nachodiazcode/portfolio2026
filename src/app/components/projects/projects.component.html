@@ -1,0 +1,25 @@
+<section id="proyectos" style="position: relative; z-index: 1; padding: 96px 32px; background: #0D0915; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06);">
+  <div style="max-width: 1180px; margin: 0 auto;">
+
+    <!-- Header -->
+    <div appScrollReveal style="margin-bottom: 48px; max-width: 660px;">
+      <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 16px;">Proyectos personales</div>
+      <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 16px; line-height: 1; color: #fff;">Proyectos</h2>
+      <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #8B8398;">Cosas que construyo fuera del horario laboral, por el gusto de aprender y de terminar lo que empiezo.</p>
+    </div>
+
+    <!-- Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
+      <article *ngFor="let p of projects" appScrollReveal (mouseenter)="playHover()" class="project-card">
+        <div class="project-year">{{ p.year }}</div>
+        <h3 class="project-title">{{ p.title }}</h3>
+        <div class="project-tagline">{{ p.tagline }}</div>
+        <p class="project-desc">{{ p.description }}</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 7px;">
+          <span *ngFor="let t of p.tech" class="tech-pill">{{ t }}</span>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,28 @@
+<div class="versions-container">
+  <div appScrollReveal class="header-section">
+    <h3 class="versions-title">Evolución Tecnológica</h3>
+    <div class="title-underline"></div>
+    <p class="versions-subtitle">Un vistazo a la historia de las herramientas que construyen la web moderna.</p>
+  </div>
+
+  <div class="framework-grid">
+    <div *ngFor="let fw of frameworks" appScrollReveal class="framework-column">
+      
+      <div class="fw-header" [style.border-bottom-color]="fw.color">
+        <h4 [style.color]="fw.color">{{ fw.name }}</h4>
+      </div>
+
+      <div class="timeline">
+        <div *ngFor="let v of fw.versions" class="timeline-item">
+          <div class="timeline-marker" [style.border-color]="fw.color"></div>
+          <div class="timeline-content">
+            <span class="timeline-year" [style.color]="fw.color">{{ v.year }}</span>
+            <div class="timeline-version">{{ v.version }}</div>
+            <div class="timeline-detail">{{ v.detail }}</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

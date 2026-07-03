@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Local junk
+chrome_debug.log
+console.log
+package-lock 2.json
+package-lock 3.json
+public/ignacio 2.png

@@ -1,1 +1,114 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #0A0710;
+  color: #F4F1F8;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0710;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  border: 2px solid #0A0710;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#FB2576, #7B2FF7);
+}
+
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+  
+  body {
+    background: #fff !important;
+    color: #111 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  /* Ocultar UI interactiva */
+  nav, 
+  .dock-nav,
+  button, 
+  .btn-cv, 
+  .btn-print, 
+  .social-icon, 
+  .photo-glow, 
+  .experience-floating-card, 
+  .pulse-dot, 
+  .status-badge,
+  .modal-backdrop,
+  .btn-primary-dock,
+  .dock-actions,
+  #contacto,
+  .photo-border {
+    display: none !important;
+  }
+  
+  /* Resetear contenedores y tarjetas */
+  section {
+    background: #fff !important;
+    padding: 20px 0 !important;
+    border: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .job-card, .stack-card, .framework-column {
+    background: #f9f9f9 !important;
+    color: #111 !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    transform: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Forzar colores de texto legibles sobre fondos que antes eran oscuros */
+  .job-title, .job-company, .job-desc, .about-title, .about-desc, .hero-name, .hero-subtitle, h1, h2, h3, h4, p, span {
+    color: #111 !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+  }
+  
+  /* Mantener el diseño de las pills pero adaptado */
+  .tech-pill {
+    background: #eee !important;
+    color: #333 !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  /* Timeline y divisores */
+  .title-underline, .fw-header {
+    border-color: #ccc !important;
+  }
+  .timeline::before {
+    background: #ccc !important;
+  }
+  .timeline-marker {
+    background: #fff !important;
+    border-color: #555 !important;
+  }
+}
