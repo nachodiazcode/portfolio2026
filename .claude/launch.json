@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start"],
+      "port": 4200
+    },
+    {
+      "name": "design-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8123", "--directory", "/private/tmp/claude-501/-Users-ignaciodiaz-Documents-Portafolio-Ignacio-Diaz--claude-worktrees-levantar-proyecto-cfbe4a/939d9750-8ed4-416a-9f47-15595420a5bd/scratchpad"],
+      "port": 8123
+    }
+  ]
+}
