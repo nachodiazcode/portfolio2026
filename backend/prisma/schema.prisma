@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id           String    @id @default(uuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         Role      @default(USER)
+  /// Hash del refresh token vigente. Null = sesión cerrada.
+  refreshHash  String?
+  createdAt    DateTime  @default(now())
+  messages     Message[]
+
+  @@map("users")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  body      String   @db.VarChar(2000)
+  /// true = lo escribió Ignacio respondiendo; false = lo escribió el visitante.
+  fromOwner Boolean  @default(false)
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  /// Conversación a la que pertenece: siempre el visitante, aunque escriba el dueño.
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+
+  @@index([authorId, createdAt])
+  @@map("messages")
+}

@@ -2,11 +2,12 @@ import { Component, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HoverStyleDirective } from './directives/hover-style.directive';
 import { SpaceParticlesDirective } from './directives/space-particles.directive';
+import { ChatComponent } from './components/chat/chat.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, HoverStyleDirective, SpaceParticlesDirective],
+  imports: [CommonModule, HoverStyleDirective, SpaceParticlesDirective, ChatComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -15,12 +16,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   selected: any = null;
   cert: any = null;
   menuOpen = false;
+  cvModal = false;
+  chatOpen = false;
   year = new Date().getFullYear();
   showTechStack = true;
 
   // ---------- imágenes (public/) ----------
   private logos: Record<string, string> = {
-    'Ideatech': 'ideatech.png',
+    'Ideatech': 'ideatech-icon.png',
     'Imagemaker': 'imagemaker.png',
     'Orbis Data': 'orbisdata.png',
     'BC Tecnología': 'bctecnologia.png',
@@ -176,14 +179,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   ];
 
   private certificatesRaw = [
-    { title: 'Programación Orientada a Objetos con Python', issuer: 'EDteam · ID 187706', year: 'dic. 2023', img: '' },
-    { title: 'JavaScript desde cero', issuer: 'EDteam', year: 'abr. 2023', img: '' },
-    { title: 'Programación desde cero 2023', issuer: 'EDteam', year: 'oct. 2023', img: 'programación desde cero 2023.jpeg' },
-    { title: '¿Cómo cotizar un proyecto?', issuer: 'EDteam', year: 'jul. 2023', img: '' },
-    { title: 'Angular esencial', issuer: 'LinkedIn Learning', year: 'mar. 2018', img: 'angular-escencial.jpeg' },
-    { title: 'Angular 2 avanzado: Trabajo con APIs', issuer: 'LinkedIn Learning', year: 'abr. 2018', img: '' },
-    { title: 'Angular 2 práctico: Sitio de consumo de videos', issuer: 'LinkedIn Learning', year: 'mar. 2018', img: '' },
-    { title: 'React esencial', issuer: 'LinkedIn Learning', year: 'feb. 2018', img: '' }
+    { title: 'Programación Orientada a Objetos con Python', issuer: 'EDteam · 4 h', year: 'dic. 2023', img: '2e4803d6-343a-4c82-9a5f-0a41e7ffcd81.png' },
+    { title: 'JavaScript desde cero', issuer: 'EDteam · 8 h', year: 'abr. 2023', img: '1698622567660.jpeg' },
+    { title: 'Programación desde cero 2023', issuer: 'EDteam · 6 h', year: 'oct. 2023', img: '1698622619515.jpeg' },
+    { title: '¿Cómo cotizar un proyecto?', issuer: 'EDteam · 1 h', year: 'jul. 2023', img: '1698622741233.jpeg' },
+    { title: 'Angular esencial', issuer: 'LinkedIn Learning · 4 h 28 min', year: 'mar. 2018', img: '1698623616695.jpeg' },
+    { title: 'Angular 2 avanzado: Trabajo con APIs', issuer: 'LinkedIn Learning · 3 h 3 min', year: 'abr. 2018', img: '1698623541511.jpeg' },
+    { title: 'Angular 2 práctico: Sitio de consumo de videos', issuer: 'LinkedIn Learning · 2 h 42 min', year: 'mar. 2018', img: '1698623649461.jpeg' },
+    { title: 'React esencial', issuer: 'LinkedIn Learning · 2 h 31 min', year: 'feb. 2018', img: '1698622958296.jpeg' }
   ];
 
   testimonials = [
@@ -314,9 +317,16 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   stop(e: Event): void { e.stopPropagation(); }
   toTop(): void { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
+  openChat(): void { this.menuOpen = false; this.chatOpen = true; this.syncLock(); }
+  closeChat(): void { this.chatOpen = false; this.syncLock(); }
+
+  /** Intercepta el clic del botón para confirmar antes de descargar el CV. */
+  askCv(e: Event): void { e.preventDefault(); this.menuOpen = false; this.cvModal = true; this.syncLock(); }
+  closeCv(): void { this.cvModal = false; this.syncLock(); }
+
   private lock = false;
   private syncLock(): void {
-    const open = !!this.selected || !!this.menuOpen || !!this.cert;
+    const open = !!this.selected || !!this.menuOpen || !!this.cert || !!this.cvModal || !!this.chatOpen;
     if (open !== this.lock) {
       this.lock = open;
       document.body.style.overflow = open ? 'hidden' : '';
