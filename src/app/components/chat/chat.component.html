@@ -47,8 +47,17 @@
                  style="width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); color: #F4F1F8; font-family: inherit; font-size: 14.5px;">
         </label>
 
-        @if (error()) {
+        @if (error() && !offline()) {
           <div role="alert" style="font-size: 13px; color: #FFB4C8; background: rgba(251,37,118,.12); border: 1px solid rgba(251,37,118,.35); border-radius: 10px; padding: 9px 12px;">{{ error() }}</div>
+        }
+
+        @if (offline()) {
+          <div role="alert" style="font-size: 13px; line-height: 1.6; color: #C7C0D2; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 13px 15px;">
+            <strong style="display: block; color: #fff; margin-bottom: 4px;">El chat está en mantenimiento</strong>
+            Escríbeme directamente a
+            <a href="mailto:ignaciosergiodiaz&#64;gmail.com" style="color: #F0A6C8; font-weight: 700;">ignaciosergiodiaz&#64;gmail.com</a>
+            y te respondo a la brevedad.
+          </div>
         }
 
         <button type="submit" [disabled]="loading()"

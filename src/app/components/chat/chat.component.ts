@@ -158,8 +158,14 @@ export class ChatComponent implements OnDestroy {
     else this.error.set(this.humanize(e));
   }
 
+  /** true cuando la API no responde: mostramos una vía de contacto alternativa. */
+  offline = signal(false);
+
   private humanize(e: any): string {
-    if (e?.status === 0) return 'No se pudo conectar con el servidor. Intenta más tarde.';
+    if (e?.status === 0) {
+      this.offline.set(true);
+      return 'El chat no está disponible en este momento.';
+    }
     if (e?.status === 429) return 'Demasiados intentos. Espera un momento.';
     const msg = e?.error?.message;
     if (Array.isArray(msg)) return msg[0];
