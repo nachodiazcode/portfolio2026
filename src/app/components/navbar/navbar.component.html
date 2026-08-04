@@ -5,7 +5,7 @@
   <div class="dock-container">
     
     <!-- Logo / Nombre -->
-    <a href="#inicio" class="dock-brand" (mouseenter)="playHover()" (click)="playClick()">
+    <a [routerLink]="[]" fragment="inicio" class="dock-brand" (mouseenter)="playHover()" (click)="playClick()">
       <div class="brand-avatar">
         <img [src]="photo" [alt]="brandName" />
       </div>
@@ -15,14 +15,14 @@
     <!-- Enlaces Principales (Solo Desktop) -->
     <div class="dock-links desktop-only">
       <div class="dock-indicator" aria-hidden="true"></div>
-      <a href="#inicio" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'inicio'}" class="dock-link">Inicio</a>
-      <a href="#filosofia" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'filosofia'}" class="dock-link">Filosofía</a>
-      <a href="#sobre-mi" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'sobre-mi'}" class="dock-link">Sobre mí</a>
-      <a href="#stack" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'stack'}" class="dock-link">Stack</a>
-      <a href="#proyectos" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'proyectos'}" class="dock-link">Proyectos</a>
-      <a href="#experiencia" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'experiencia'}" class="dock-link">Experiencia</a>
-      <a href="#educacion" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'educacion'}" class="dock-link">Educación</a>
-      <a href="#contacto" (mouseenter)="playHover()" (click)="playClick()" [ngClass]="{'active': activeId === 'contacto'}" class="dock-link">Contacto</a>
+      <a [routerLink]="[]" fragment="inicio" (mouseenter)="playHover()" (click)="goTo('inicio')" [ngClass]="{'active': activeId === 'inicio'}" class="dock-link">Inicio</a>
+      <a [routerLink]="[]" fragment="filosofia" (mouseenter)="playHover()" (click)="goTo('filosofia')" [ngClass]="{'active': activeId === 'filosofia'}" class="dock-link">Filosofía</a>
+      <a [routerLink]="[]" fragment="sobre-mi" (mouseenter)="playHover()" (click)="goTo('sobre-mi')" [ngClass]="{'active': activeId === 'sobre-mi'}" class="dock-link">Sobre mí</a>
+      <a [routerLink]="[]" fragment="stack" (mouseenter)="playHover()" (click)="goTo('stack')" [ngClass]="{'active': activeId === 'stack'}" class="dock-link">Stack</a>
+      <a [routerLink]="[]" fragment="proyectos" (mouseenter)="playHover()" (click)="goTo('proyectos')" [ngClass]="{'active': activeId === 'proyectos'}" class="dock-link">Proyectos</a>
+      <a [routerLink]="[]" fragment="experiencia" (mouseenter)="playHover()" (click)="goTo('experiencia')" [ngClass]="{'active': activeId === 'experiencia'}" class="dock-link">Experiencia</a>
+      <a [routerLink]="[]" fragment="educacion" (mouseenter)="playHover()" (click)="goTo('educacion')" [ngClass]="{'active': activeId === 'educacion'}" class="dock-link">Educación</a>
+      <a [routerLink]="[]" fragment="contacto" (mouseenter)="playHover()" (click)="goTo('contacto')" [ngClass]="{'active': activeId === 'contacto'}" class="dock-link">Contacto</a>
     </div>
 
     <!-- Redes Sociales y Acciones -->

@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AudioService } from '../../services/audio.service';
+import { ScrollService } from '../../services/scroll.service';
 import { ContactInfo } from '../../models/profile.model';
 import { CONTACT } from '../../data/contact.data';
 
@@ -30,7 +31,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   scrollProgress = '0%';
   private scrollInterval: any;
 
-  constructor(private audioService: AudioService, private elRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private audioService: AudioService,
+    private elRef: ElementRef<HTMLElement>,
+    private scroller: ScrollService
+  ) {}
 
   ngOnInit(): void {
     this.updateScroll();
@@ -93,6 +98,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   playClick(): void {
     this.audioService.play('click');
+  }
+
+  /** Suena el clic y baja a la sección. El routerLink solo deja el href correcto. */
+  goTo(fragment: string): void {
+    this.audioService.play('click');
+    this.scroller.scrollToFragment(fragment);
   }
 
   onToggleSound(e: Event): void {

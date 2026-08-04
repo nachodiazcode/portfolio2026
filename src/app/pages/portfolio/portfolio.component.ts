@@ -27,6 +27,7 @@ import { SpotlightDirective } from '../../directives/spotlight.directive';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
 
 import { AudioService } from '../../services/audio.service';
+import { ScrollService } from '../../services/scroll.service';
 import { Job } from '../../models/job.model';
 import { Profile } from '../../models/profile.model';
 import { FRONTEND_PROFILE } from '../../data/profiles/frontend.profile';
@@ -80,6 +81,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   constructor(
     private audioService: AudioService,
+    private scroller: ScrollService,
     private route: ActivatedRoute,
     private titleService: Title,
     private meta: Meta
@@ -178,5 +180,11 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   playClick(): void {
     this.audioService.play('click');
+  }
+
+  /** Suena el clic y baja a la sección. El routerLink solo deja el href correcto. */
+  goTo(fragment: string): void {
+    this.audioService.play('click');
+    this.scroller.scrollToFragment(fragment);
   }
 }

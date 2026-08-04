@@ -28,8 +28,8 @@
         <span class="nav-title">Navegación</span>
         
         <a *ngFor="let lnk of menuLinks; let i = index" 
-           [href]="lnk.href" 
-           (click)="onLinkClick($event)" 
+           [routerLink]="[]" [fragment]="lnk.fragment" 
+           (click)="onLinkClick(lnk.fragment)" 
            (mouseenter)="playHover()" 
            class="menu-link stagger-item" 
            [style.transition-delay]="(isOpen ? 0.14 + i * 0.07 : 0) + 's'">

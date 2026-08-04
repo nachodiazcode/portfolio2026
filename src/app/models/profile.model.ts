@@ -72,8 +72,10 @@ export interface Profile {
     flipWords: string[];
     bio: string;
     photo: string;
-    ctaPrimary: { label: string; href: string };
-    ctaSecondary: { label: string; href: string };
+    /** `fragment` y no href: con <base href> un "#id" suelto se resuelve contra
+     *  el base y perdería la ruta actual (/fullstack → /). */
+    ctaPrimary: { label: string; fragment: string };
+    ctaSecondary: { label: string; fragment: string };
     floatingTitle: string;
     floatingSubtitle: string;
   };

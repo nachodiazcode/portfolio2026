@@ -64,11 +64,11 @@
           {{ profile.contact.location }}
         </div>
         <div appScrollReveal style="display: flex; flex-wrap: wrap; gap: 14px;">
-          <a appMagnetic [href]="profile.hero.ctaPrimary.href" (mouseenter)="playHover()" (click)="playClick()" class="btn-primary">
+          <a appMagnetic [routerLink]="[]" [fragment]="profile.hero.ctaPrimary.fragment" (mouseenter)="playHover()" (click)="goTo(profile.hero.ctaPrimary.fragment)" class="btn-primary">
             {{ profile.hero.ctaPrimary.label }}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
-          <a appMagnetic [href]="profile.hero.ctaSecondary.href" (mouseenter)="playHover()" (click)="playClick()" class="btn-secondary">{{ profile.hero.ctaSecondary.label }}</a>
+          <a appMagnetic [routerLink]="[]" [fragment]="profile.hero.ctaSecondary.fragment" (mouseenter)="playHover()" (click)="goTo(profile.hero.ctaSecondary.fragment)" class="btn-secondary">{{ profile.hero.ctaSecondary.label }}</a>
         </div>
       </div>
 
