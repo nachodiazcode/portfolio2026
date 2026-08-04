@@ -47,3 +47,6 @@ console.log
 package-lock 2.json
 package-lock 3.json
 public/ignacio 2.png
+
+# Claude Code: ajustes locales de máquina
+.claude/settings.local.json

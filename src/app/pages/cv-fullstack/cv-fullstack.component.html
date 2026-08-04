@@ -1,0 +1,100 @@
+<div class="cv-page">
+
+  <!-- Barra de acciones: no se imprime -->
+  <header class="cv-toolbar">
+    <a routerLink="/fullstack" class="cv-back">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Volver al portafolio
+    </a>
+    <button type="button" class="cv-print" (click)="print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+      Imprimir / Guardar PDF
+    </button>
+  </header>
+
+  <!-- Hoja A4 -->
+  <article class="cv-sheet">
+
+    <div class="cv-head">
+      <div>
+        <h1 class="cv-name">{{ cv.name }}</h1>
+        <div class="cv-role">{{ cv.role }}</div>
+      </div>
+      <div class="cv-contact">
+        <div>{{ contact.email }}</div>
+        <div>{{ contact.location }}</div>
+        <div *ngIf="contact.github">{{ shortUrl(contact.github) }}</div>
+        <div *ngIf="contact.linkedin">{{ shortUrl(contact.linkedin) }}</div>
+      </div>
+    </div>
+
+    <section class="cv-block">
+      <h2 class="cv-section-title">Perfil</h2>
+      <p class="cv-summary">{{ cv.summary }}</p>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-section-title">Stack técnico</h2>
+      <div class="cv-skills">
+        <div *ngFor="let s of cv.skills" class="cv-skill-row">
+          <span class="cv-skill-label">{{ s.title }}</span>
+          <span class="cv-skill-items">{{ s.items }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-section-title">Experiencia profesional</h2>
+      <div *ngFor="let r of cv.roles" class="cv-role-item">
+        <div class="cv-role-head">
+          <div>
+            <span class="cv-role-title">{{ r.title }}</span>
+            <span class="cv-role-company"> · {{ r.company }}</span>
+          </div>
+          <span class="cv-role-dates">{{ r.dates }}</span>
+        </div>
+        <ul class="cv-bullets">
+          <li *ngFor="let b of r.bullets">{{ b }}</li>
+        </ul>
+        <div class="cv-tech">{{ r.tech.join(' · ') }}</div>
+      </div>
+    </section>
+
+    <section class="cv-block" *ngIf="cv.earlier.length">
+      <h2 class="cv-section-title">Experiencia anterior</h2>
+      <div *ngFor="let e of cv.earlier" class="cv-earlier-item">
+        <span class="cv-earlier-label">{{ e.label }}</span>
+        <span class="cv-earlier-detail">{{ e.detail }}</span>
+      </div>
+    </section>
+
+    <section class="cv-block">
+      <h2 class="cv-section-title">Proyectos personales</h2>
+      <div *ngFor="let p of cv.projects" class="cv-project">
+        <div class="cv-project-title">{{ p.title }}</div>
+        <p class="cv-project-desc">{{ p.description }}</p>
+        <div class="cv-tech">{{ p.tech }}</div>
+      </div>
+    </section>
+
+    <section class="cv-block" *ngIf="cv.education.length">
+      <h2 class="cv-section-title">Formación</h2>
+      <div *ngFor="let ed of cv.education" class="cv-role-head">
+        <div>
+          <span class="cv-role-title">{{ ed.title }}</span>
+          <span class="cv-role-company"> · {{ ed.institution }}</span>
+        </div>
+        <span class="cv-role-dates">{{ ed.dates }}</span>
+      </div>
+    </section>
+
+    <section class="cv-block" *ngIf="cv.languages.length">
+      <h2 class="cv-section-title">Idiomas</h2>
+      <div class="cv-earlier-item" *ngFor="let l of cv.languages">
+        <span class="cv-earlier-label">{{ l.name }}</span>
+        <span class="cv-earlier-detail">{{ l.level }}</span>
+      </div>
+    </section>
+
+  </article>
+</div>

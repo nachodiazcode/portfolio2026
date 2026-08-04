@@ -1,28 +1,53 @@
 <div class="versions-container">
   <div appScrollReveal class="header-section">
-    <h3 class="versions-title">Evolución Tecnológica</h3>
-    <div class="title-underline"></div>
-    <p class="versions-subtitle">Un vistazo a la historia de las herramientas que construyen la web moderna.</p>
+    <div class="versions-eyebrow">Línea de tiempo</div>
+    <h3 class="versions-title">Evolución tecnológica</h3>
+    <p class="versions-subtitle">Elegí un framework y recorré su historia — versión a versión.</p>
   </div>
 
-  <div class="framework-grid">
-    <div *ngFor="let fw of frameworks" appScrollReveal class="framework-column">
-      
-      <div class="fw-header" [style.border-bottom-color]="fw.color">
-        <h4 [style.color]="fw.color">{{ fw.name }}</h4>
-      </div>
+  <div appScrollReveal class="ft-panel" [style.--fw]="active.color">
 
-      <div class="timeline">
-        <div *ngFor="let v of fw.versions" class="timeline-item">
-          <div class="timeline-marker" [style.border-color]="fw.color"></div>
-          <div class="timeline-content">
-            <span class="timeline-year" [style.color]="fw.color">{{ v.year }}</span>
-            <div class="timeline-version">{{ v.version }}</div>
-            <div class="timeline-detail">{{ v.detail }}</div>
-          </div>
+    <!-- Selector de framework -->
+    <div class="ft-tabs" role="tablist">
+      <button *ngFor="let fw of frameworks; let i = index"
+              type="button"
+              class="ft-tab"
+              [class.active]="i === activeIndex"
+              [style.--fw]="fw.color"
+              (click)="selectFramework(i)"
+              role="tab"
+              [attr.aria-selected]="i === activeIndex">
+        <span class="ft-tab-logo" [ngSwitch]="fw.name">
+          <svg *ngSwitchCase="'Angular'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+            <path d="M12 2 3 5.3l1.4 12L12 22l7.6-4.7L21 5.3 12 2Z"/>
+            <path d="M12 6.4 7.6 16.2h1.75l.9-2.3h3.5l.9 2.3h1.75L12 6.4Zm0 3.1 1.15 2.85h-2.3L12 9.5Z" fill="currentColor" stroke="none"/>
+          </svg>
+          <svg *ngSwitchDefault viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+            <circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/>
+            <ellipse cx="12" cy="12" rx="10" ry="3.9"/>
+            <ellipse cx="12" cy="12" rx="10" ry="3.9" transform="rotate(60 12 12)"/>
+            <ellipse cx="12" cy="12" rx="10" ry="3.9" transform="rotate(120 12 12)"/>
+          </svg>
+        </span>
+        <span class="ft-tab-name">{{ fw.name }}</span>
+        <span class="ft-tab-range">{{ fw.versions[0].year }}—{{ fw.versions[fw.versions.length - 1].year }}</span>
+      </button>
+    </div>
+
+    <!-- Timeline horizontal -->
+    <div class="ft-timeline" [class.is-fading]="fading" [style.--n]="active.versions.length">
+      <div *ngFor="let v of active.versions; let last = last" class="ft-node" [class.is-latest]="last">
+        <div class="ft-node-year">
+          <span class="ft-year-chip">{{ v.year }}</span>
+          <span *ngIf="last" class="ft-now">Ahora</span>
+        </div>
+        <span class="ft-dot"></span>
+        <div class="ft-node-body">
+          <div class="ft-version">{{ v.version }}</div>
+          <div class="ft-detail">{{ v.detail }}</div>
         </div>
       </div>
-
     </div>
+
   </div>
 </div>

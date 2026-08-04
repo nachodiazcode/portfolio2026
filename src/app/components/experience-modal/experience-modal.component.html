@@ -12,20 +12,20 @@
         <div style="padding: 32px 32px 24px; border-bottom: 1px solid rgba(255,255,255,.08);">
           <div style="display: flex; align-items: center; gap: 16px; padding-right: 48px;">
             <!-- Initial circle -->
-            <div style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 15px; background: linear-gradient(135deg,#FB2576,#7B2FF7); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; letter-spacing: -.5px; box-shadow: 0 10px 26px rgba(251,37,118,.35); overflow: hidden;">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 15px; background: linear-gradient(135deg,var(--accent-1),var(--accent-2)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; letter-spacing: -.5px; box-shadow: 0 10px 26px rgba(var(--accent-1-rgb),.35); overflow: hidden;">
               <img *ngIf="job.logoUrl" [src]="job.logoUrl" alt="Logo de {{ job.company }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
               <span *ngIf="!job.logoUrl">{{ job.company.charAt(0) }}</span>
             </div>
             <div>
               <h3 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; letter-spacing: -.6px; color: #fff;">{{ job.title }}</h3>
-              <div style="font-size: 15px; font-weight: 600; background: linear-gradient(120deg,#FB2576,#B14BF0); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block;">{{ job.company }}</div>
+              <div style="font-size: 15px; font-weight: 600; background: linear-gradient(120deg,var(--accent-1),var(--accent-mid)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block;">{{ job.company }}</div>
             </div>
           </div>
         </div>
 
         <!-- Modal Body -->
         <div style="padding: 28px 32px 34px;">
-          <div style="display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 24px; font-size: 13.5px; font-weight: 500; color: #8B8398;">
+          <div style="display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 24px; font-size: 13.5px; font-weight: 500; color: var(--text-6);">
             <span style="display: inline-flex; align-items: center; gap: 7px;">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
               {{ job.dates }}
@@ -35,10 +35,10 @@
               {{ job.duration }}
             </span>
           </div>
-          <p style="margin: 0 0 28px; font-size: 16px; line-height: 1.7; color: #C7C0D2; text-wrap: pretty;">{{ job.description }}</p>
+          <p style="margin: 0 0 28px; font-size: 16px; line-height: 1.7; color: var(--text-3); text-wrap: pretty;">{{ job.description }}</p>
           
           <!-- Tech Stack -->
-          <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6E6678; margin-bottom: 12px;">Tech Stack</div>
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-7); margin-bottom: 12px;">Tech Stack</div>
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
             <span *ngFor="let t of job.tech" class="tech-pill-modal">{{ t }}</span>
           </div>
@@ -47,18 +47,18 @@
 
       <!-- Vista previa del Proyecto (Una sola imagen) -->
       <div *ngIf="job.projectImageUrl && (!job.projectImages || job.projectImages.length === 0)" class="modal-image-column">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6E6678; margin-bottom: 16px; align-self: flex-start;">
-          Proyecto: {{ job.projectTitle }}
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-7); margin-bottom: 16px; align-self: flex-start;">
+          {{ job.projectLabel || 'Proyecto' }}: {{ job.projectTitle }}
         </div>
         <div class="project-mockup-wrapper">
-          <img [src]="job.projectImageUrl" alt="Captura de pantalla del proyecto {{ job.projectTitle }}">
+          <img [src]="job.projectImageUrl" alt="{{ job.projectLabel || 'Proyecto' }} {{ job.projectTitle }}">
         </div>
       </div>
 
       <!-- Vista previa del Proyecto (Carrusel) -->
       <div *ngIf="job.projectImages && job.projectImages.length > 0" class="modal-image-column">
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #6E6678; margin-bottom: 16px; align-self: flex-start;">
-          Proyecto: {{ job.projectTitle }}
+        <div style="font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-7); margin-bottom: 16px; align-self: flex-start;">
+          {{ job.projectLabel || 'Proyecto' }}: {{ job.projectTitle }}
         </div>
         <div class="project-mockup-wrapper carousel-wrapper" style="position: relative; overflow: hidden; width: 100%;">
           

@@ -1,0 +1,8 @@
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span *ngFor="let item of loop; let i = index" class="marquee-item" [class.solid]="i % 4 === 1">
+      {{ item }}
+      <span class="marquee-dot">✦</span>
+    </span>
+  </div>
+</div>

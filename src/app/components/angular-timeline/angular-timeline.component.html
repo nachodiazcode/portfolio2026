@@ -1,0 +1,66 @@
+<div class="glass-card" (mouseleave)="resume()">
+
+  <!-- Barra de título estilo macOS -->
+  <div class="glass-titlebar">
+    <div class="traffic-lights">
+      <span class="tl tl-red"></span>
+      <span class="tl tl-yellow"></span>
+      <span class="tl tl-green"></span>
+    </div>
+    <div class="titlebar-label">{{ titlebar }}</div>
+  </div>
+
+  <div class="glass-body">
+
+    <!-- Header con escudo Angular -->
+    <div class="card-header">
+      <svg class="ng-shield" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="ngGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="var(--accent-1)"/>
+            <stop offset="100%" stop-color="var(--accent-2)"/>
+          </linearGradient>
+        </defs>
+        <ng-container *ngIf="icon === 'angular'; else nodeIcon">
+          <path fill="url(#ngGrad)" d="M125 30 L31.9 63.2 L46.1 186.3 L125 230 L203.9 186.3 L218.1 63.2 Z"/>
+          <path fill="#fff" d="M125 52.1 L66.8 182.6 h21.7 l11.7 -29.2 h49.4 l11.7 29.2 h21.7 L125 52.1 Z M141.6 135.4 h-33.2 L125 95.5 Z"/>
+        </ng-container>
+        <ng-template #nodeIcon>
+          <!-- Hexágono de Node.js -->
+          <path fill="url(#ngGrad)" d="M125 20 L216 72.5 L216 177.5 L125 230 L34 177.5 L34 72.5 Z"/>
+          <path fill="#fff" d="M92 168 V96 h20 l32 45 V96 h18 v72 h-20 l-32 -45 v45 Z"/>
+        </ng-template>
+      </svg>
+      <div>
+        <div class="card-title">{{ label }}</div>
+        <div class="card-sub">{{ subtitle }}</div>
+      </div>
+    </div>
+
+    <!-- Timeline animado -->
+    <div class="vtimeline">
+      <div class="vline"><div class="vline-fill" [style.height.%]="fillPercent"></div></div>
+
+      <div *ngFor="let v of versions; let i = index"
+           class="vitem"
+           [class.active]="i === activeIndex"
+           [class.passed]="i < activeIndex"
+           (mouseenter)="setActive(i)">
+        <div class="vdot"></div>
+        <div class="vhead">
+          <span class="vyear">{{ v.year }}</span>
+          <span class="vname">{{ v.version }}</span>
+        </div>
+        <div class="vdetail">{{ v.detail }}</div>
+      </div>
+    </div>
+
+    <!-- Footer chips -->
+    <div class="card-footer">
+      <span *ngFor="let c of chips" class="chip">
+        <span *ngIf="c.badge" class="ts-badge">{{ c.badge }}</span>{{ c.label }}
+      </span>
+    </div>
+
+  </div>
+</div>

@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AudioService } from '../../services/audio.service';
+import { ContactInfo } from '../../models/profile.model';
+import { CONTACT } from '../../data/contact.data';
 
 @Component({
   selector: 'app-menu-overlay',
@@ -11,6 +13,10 @@ import { AudioService } from '../../services/audio.service';
 })
 export class MenuOverlayComponent implements OnChanges, OnDestroy {
   @Input() isOpen = false;
+  @Input() brandName = 'Ignacio Díaz';
+  @Input() photo = 'ignacio.png';
+  @Input() contact: ContactInfo = CONTACT;
+  @Input() badge = 'Disponible para nuevos proyectos';
   @Output() closed = new EventEmitter<void>();
 
   menuLinks = [
@@ -20,7 +26,9 @@ export class MenuOverlayComponent implements OnChanges, OnDestroy {
     { num: '04', label: 'Stack', href: '#stack' },
     { num: '05', label: 'Proyectos', href: '#proyectos' },
     { num: '06', label: 'Experiencia', href: '#experiencia' },
-    { num: '07', label: 'Contacto', href: '#contacto' }
+    { num: '07', label: 'Educación', href: '#educacion' },
+    { num: '08', label: 'Testimonios', href: '#testimonios' },
+    { num: '09', label: 'Contacto', href: '#contacto' }
   ];
 
   constructor(private audioService: AudioService) {}

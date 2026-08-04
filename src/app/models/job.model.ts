@@ -10,6 +10,7 @@ export interface Job {
   logoScale?: number;
   logoOffsetY?: number;
   projectImageUrl?: string;
+  projectLabel?: string;
   projectImages?: string[];
   projectTitle?: string;
   num?: string;

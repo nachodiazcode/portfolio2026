@@ -13,6 +13,9 @@ import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive'
 })
 export class ExperienceComponent {
   @Input() jobs: Job[] = [];
+  @Input() eyebrow = 'Trayectoria';
+  @Input() title = 'Experiencia Profesional';
+  @Input() description = '';
   @Input() showTechStack = true;
   @Output() jobSelected = new EventEmitter<Job>();
 

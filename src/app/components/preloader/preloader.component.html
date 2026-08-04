@@ -1,0 +1,13 @@
+<div *ngIf="!hidden" class="preloader" [class.done]="done" aria-hidden="true">
+
+  <div class="pre-name">
+    Ignacio Díaz<span class="pre-dot">.</span>
+  </div>
+
+  <div class="pre-count"><span #count>0</span><span class="pre-percent">%</span></div>
+
+  <div class="pre-bar-track">
+    <div #bar class="pre-bar"></div>
+  </div>
+
+</div>

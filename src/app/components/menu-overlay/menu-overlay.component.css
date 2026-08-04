@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(10, 7, 16, 0.95);
+  background: rgba(var(--bg-0-rgb), 0.95);
   backdrop-filter: blur(40px) saturate(200%);
   -webkit-backdrop-filter: blur(40px) saturate(200%);
   z-index: 1000;
@@ -62,7 +62,7 @@
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #6E6678;
+  color: var(--text-7);
   margin-bottom: 32px;
   display: block;
 }
@@ -78,19 +78,39 @@
   align-items: flex-start;
   gap: 24px;
   text-decoration: none;
-  font-size: clamp(40px, 6vw, 88px);
+  font-size: clamp(32px, 4.6vw, 64px);
   font-weight: 800;
   letter-spacing: -2px;
-  line-height: 1.1;
+  line-height: 1.12;
   color: rgba(255, 255, 255, 0.4);
-  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s;
+  opacity: 0;
+  transform: translateY(26px);
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-overlay.open .menu-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-link:hover {
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-mid));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transform: translateX(14px);
+}
+
+.menu-link:hover .menu-link-num {
+  -webkit-text-fill-color: transparent;
 }
 
 .menu-link-num {
   font-size: clamp(13px, 1.3vw, 16px);
   font-weight: 700;
   letter-spacing: 0;
-  background: linear-gradient(120deg, #FB2576, #B14BF0);
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-mid));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -128,7 +148,7 @@
 }
 
 .social-icon:hover {
-  background: linear-gradient(120deg, #FB2576, #7B2FF7);
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
   border-color: transparent;
   transform: translateY(-2px);
 }

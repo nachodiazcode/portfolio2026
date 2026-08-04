@@ -1,7 +1,181 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ============================================================
+   TOKENS DE TEMA
+   :root          = perfil Frontend (magenta / violeta) — el de siempre.
+   body.theme-node = perfil Full-Stack: verde ácido Node + verde hoja
+                     de Spring sobre un negro esmeralda.
+   Ningún componente tiene colores de marca hardcodeados: todos leen
+   de aquí, así que cambiar de universo son estas dos listas.
+   ============================================================ */
+:root {
+  /* Fondos */
+  --bg-0: #0A0710;
+  --bg-1: #0D0915;
+  --bg-2: #15101E;
+  --bg-3: #1A1428;
+  --bg-deep: #08050D;
+  --bg-0-rgb: 10, 7, 16;
+  --bg-2-rgb: 21, 16, 30;
+  --bg-deepest-rgb: 5, 3, 9;
+
+  /* Acentos */
+  --accent-1: #FB2576;
+  --accent-2: #7B2FF7;
+  --accent-mid: #B14BF0;
+  --accent-soft: #FF7EB6;
+  --accent-warm: #FF3D71;
+  --accent-pale: #FFD6E8;
+  --accent-1-rgb: 251, 37, 118;
+  --accent-2-rgb: 123, 47, 247;
+  --accent-mid-rgb: 177, 75, 240;
+  --accent-soft-rgb: 255, 158, 196;
+  --accent-pale-rgb: 255, 214, 232;
+  /* Texto legible ENCIMA de un fondo de acento */
+  --on-accent: #ffffff;
+  /* Tipografía de datos (se vuelve monoespaciada en el universo full-stack) */
+  --font-data: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Texto (de más claro a más apagado) */
+  --text-1: #F4F1F8;
+  --text-2: #D8D2E2;
+  --text-3: #C7C0D2;
+  --text-4: #A39BB0;
+  --text-5: #9A93A6;
+  --text-6: #8B8398;
+  --text-7: #6E6678;
+  --text-8: #5A5366;
+}
+
+body.theme-node {
+  /* Fondos: negro esmeralda, casi sin luz */
+  --bg-0: #050D09;
+  --bg-1: #08150E;
+  --bg-2: #0D1E15;
+  --bg-3: #112619;
+  --bg-deep: #020604;
+  --bg-0-rgb: 5, 13, 9;
+  --bg-2-rgb: 13, 30, 21;
+  --bg-deepest-rgb: 2, 6, 4;
+
+  /* Acentos: verde ácido (Node / rayo) → verde hoja de Spring */
+  --accent-1: #A3E635;
+  --accent-2: #6DB33F;
+  --accent-mid: #86D14C;
+  --accent-soft: #C8F08A;
+  --accent-warm: #D9F99D;
+  --accent-pale: #E4F7CE;
+  --accent-1-rgb: 163, 230, 53;
+  --accent-2-rgb: 109, 179, 63;
+  --accent-mid-rgb: 134, 209, 76;
+  --accent-soft-rgb: 200, 240, 138;
+  --accent-pale-rgb: 228, 247, 206;
+  /* El verde es claro: encima va texto oscuro, nunca blanco */
+  --on-accent: #06120C;
+  --font-data: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Texto: grises verdosos en vez de grises violáceos */
+  --text-1: #EFF6EE;
+  --text-2: #D2E0D2;
+  --text-3: #BFCFC0;
+  --text-4: #98A99A;
+  --text-5: #90A192;
+  --text-6: #7F8E81;
+  --text-7: #647366;
+  --text-8: #536056;
+}
+
+/* ---- El universo full-stack no es solo otro color ----
+   Datos en monoespaciada, tarjetas menos redondeadas y una grilla
+   tenue de blueprint: se siente una consola, no un portafolio de diseño. */
+body.theme-node .status-badge,
+body.theme-node .location-text,
+body.theme-node .tech-pill,
+body.theme-node .stack-pill,
+body.theme-node .stack-count,
+body.theme-node .job-meta,
+body.theme-node .job-num,
+body.theme-node .project-year,
+body.theme-node .principio-num,
+body.theme-node .stat-num,
+body.theme-node .bento-hud-tag,
+body.theme-node .bento-loc-clock,
+body.theme-node .timeline-year {
+  font-family: var(--font-data);
+  letter-spacing: -0.2px;
+}
+
+body.theme-node .stack-card,
+body.theme-node .project-card,
+body.theme-node .job-card,
+body.theme-node .bento-tile {
+  border-radius: 10px;
+}
+
+body.theme-node .stack-card,
+body.theme-node .job-card {
+  background-image:
+    linear-gradient(rgba(var(--accent-1-rgb), .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-1-rgb), .03) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+}
+
 html {
   scroll-behavior: smooth;
   box-sizing: border-box;
+  /* mismo fondo que el body: sin franjas transparentes en los bordes */
+  background: var(--bg-0);
+}
+
+/* Deja aire para el navbar flotante al navegar por anclas (#educacion, #stack, etc.) */
+section[id],
+header[id],
+footer[id] {
+  scroll-margin-top: 96px;
+}
+
+/* Educación tiene harto padding interno: el scroll baja un poco más */
+#educacion {
+  scroll-margin-top: 40px;
+}
+
+/* Filosofía: el contenido arranca alto, deja menos margen al anclar */
+#filosofia {
+  scroll-margin-top: 60px;
+}
+
+/* Word reveal (directiva appWordReveal — spans creados dinámicamente) */
+.wr-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(6px);
+  transition:
+    opacity .55s cubic-bezier(.16, 1, .3, 1),
+    transform .55s cubic-bezier(.16, 1, .3, 1),
+    filter .55s cubic-bezier(.16, 1, .3, 1);
+}
+
+.wr-visible .wr-word {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+.wr-accent {
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-mid));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Cursor custom: oculta el nativo solo cuando el componente está activo (puntero fino) */
+@media (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
 }
 
 *, *:before, *:after {
@@ -11,8 +185,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: #0A0710;
-  color: #F4F1F8;
+  background: var(--bg-0);
+  color: var(--text-1);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   -webkit-tap-highlight-color: transparent;
@@ -23,15 +197,15 @@ body {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0710;
+  background: var(--bg-0);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 99px;
-  border: 2px solid #0A0710;
+  border: 2px solid var(--bg-0);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(#FB2576, #7B2FF7);
+  background: linear-gradient(var(--accent-1), var(--accent-2));
 }
 
 @media print {

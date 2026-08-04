@@ -1,26 +1,36 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { AudioService } from '../../services/audio.service';
+import { ContactInfo } from '../../models/profile.model';
+import { CONTACT } from '../../data/contact.data';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   @Input() soundEnabled = true;
+  @Input() brandName = 'Ignacio Díaz';
+  @Input() role = '';
+  @Input() photo = 'ignacio.png';
+  @Input() contact: ContactInfo = CONTACT;
+  @Input() cvHref = '/cv-ignacio-diaz.pdf';
+  @Input() cvLabel = 'CV';
+  /** true = descarga un archivo; false = navega a una ruta interna. */
+  @Input() cvDownload = true;
   @Output() soundToggled = new EventEmitter<void>();
   @Output() menuOpened = new EventEmitter<void>();
 
   activeId = 'inicio';
   isShrunk = false;
   scrollProgress = '0%';
-  private lastTop = 0;
   private scrollInterval: any;
 
-  constructor(private audioService: AudioService) {}
+  constructor(private audioService: AudioService, private elRef: ElementRef<HTMLElement>) {}
 
   ngOnInit(): void {
     this.updateScroll();
@@ -48,16 +58,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // Shrinking header
     this.isShrunk = top > 20;
 
-    // Show/hide navbar based on scroll direction
-    const nav = document.querySelector('[data-nav]') as HTMLElement;
-    if (nav) {
-      const down = top > this.lastTop && top > 160;
-      nav.style.transform = down ? 'translateY(-105%)' : 'none';
-    }
-    this.lastTop = top;
-
     // Scroll-spy active link
-    const ids = ['inicio', 'filosofia', 'sobre-mi', 'stack', 'proyectos', 'experiencia', 'contacto'];
+    const ids = ['inicio', 'filosofia', 'sobre-mi', 'stack', 'proyectos', 'experiencia', 'educacion', 'contacto'];
     let active = ids[0];
     for (const id of ids) {
       const s = document.getElementById(id);
@@ -66,6 +68,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     }
     this.activeId = active;
+
+    // reposiciona el indicador deslizante después del change detection
+    requestAnimationFrame(() => this.updateIndicator());
+  }
+
+  private updateIndicator(): void {
+    const host = this.elRef.nativeElement;
+    const indicator = host.querySelector<HTMLElement>('.dock-indicator');
+    const active = host.querySelector<HTMLElement>('.dock-link.active');
+    if (!indicator) return;
+    if (!active) {
+      indicator.style.opacity = '0';
+      return;
+    }
+    indicator.style.opacity = '1';
+    indicator.style.width = `${active.offsetWidth}px`;
+    indicator.style.transform = `translateX(${active.offsetLeft}px)`;
   }
 
   playHover(): void {

@@ -1,0 +1,235 @@
+.glass-card {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .085), rgba(255, 255, 255, .035) 40%, rgba(255, 255, 255, .05));
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, .14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .22),
+    inset 0 -1px 0 rgba(255, 255, 255, .05),
+    0 30px 60px rgba(0, 0, 0, .5),
+    0 8px 20px rgba(0, 0, 0, .35);
+}
+
+/* brillo superior tipo vidrio */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 120px;
+  background: radial-gradient(120% 100% at 50% 0%, rgba(255, 255, 255, .12), transparent 70%);
+  pointer-events: none;
+}
+
+.glass-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .09);
+  background: rgba(255, 255, 255, .03);
+}
+
+.traffic-lights {
+  display: flex;
+  gap: 7px;
+}
+
+.tl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, .25);
+}
+
+.tl-red { background: #FF5F57; }
+.tl-yellow { background: #FEBC2E; }
+.tl-green { background: #28C840; }
+
+.titlebar-label {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: rgba(255, 255, 255, .45);
+  /* compensa el ancho de los semáforos para centrar de verdad */
+  margin-right: 50px;
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+}
+
+.glass-body {
+  padding: 24px 24px 22px;
+  position: relative;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.ng-shield {
+  width: 46px;
+  height: 46px;
+  filter: drop-shadow(0 6px 14px rgba(var(--accent-1-rgb), .35));
+}
+
+.card-title {
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.card-sub {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-6);
+  margin-top: 2px;
+}
+
+/* ---- Timeline ---- */
+.vtimeline {
+  position: relative;
+  padding-left: 26px;
+}
+
+.vline {
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, .1);
+}
+
+.vline-fill {
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(var(--accent-1), var(--accent-2));
+  box-shadow: 0 0 10px rgba(var(--accent-1-rgb), .55);
+  transition: height .7s cubic-bezier(.16, 1, .3, 1);
+}
+
+.vitem {
+  position: relative;
+  padding: 9px 0;
+  cursor: default;
+  opacity: .45;
+  transition: opacity .45s;
+}
+
+.vitem.passed {
+  opacity: .7;
+}
+
+.vitem.active {
+  opacity: 1;
+}
+
+.vdot {
+  position: absolute;
+  left: -26px;
+  top: 14px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, .35);
+  background: #16101f;
+  transition: border-color .4s, box-shadow .4s, transform .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.vitem.passed .vdot,
+.vitem.active .vdot {
+  border-color: var(--accent-1);
+}
+
+.vitem.active .vdot {
+  transform: scale(1.25);
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 0 14px rgba(var(--accent-1-rgb), .8);
+}
+
+.vhead {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.vyear {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-6);
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+}
+
+.vitem.active .vyear {
+  color: var(--accent-1);
+}
+
+.vname {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.2px;
+  color: var(--text-2);
+}
+
+.vitem.active .vname {
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-mid));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.vdetail {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-6);
+  margin-top: 2px;
+  max-width: 320px;
+}
+
+/* ---- Footer ---- */
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-3);
+  background: rgba(255, 255, 255, .055);
+  border: 1px solid rgba(255, 255, 255, .12);
+  padding: 5px 11px;
+  border-radius: 999px;
+}
+
+.ts-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #3178C6;
+  color: #fff;
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0;
+}

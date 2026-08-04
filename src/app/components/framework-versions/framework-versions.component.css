@@ -1,127 +1,274 @@
 .versions-container {
-  padding: 40px 0;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
+/* ===== Header ===== */
 .header-section {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
+  max-width: 640px;
+}
+
+.versions-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-mid));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-bottom: 8px;
 }
 
 .versions-title {
-  font-size: 28px;
+  font-size: clamp(28px, 3.4vw, 40px);
   font-weight: 800;
   color: #fff;
-  margin: 0 0 14px 0;
-  letter-spacing: -0.5px;
-}
-
-.title-underline {
-  width: 44px;
-  height: 3px;
-  background: linear-gradient(90deg, #FB2576, #7B2FF7);
-  border-radius: 999px;
-  margin-bottom: 16px;
+  margin: 0 0 12px 0;
+  letter-spacing: -1px;
+  line-height: 1;
 }
 
 .versions-subtitle {
   font-size: 15px;
-  color: #A39BB0;
+  line-height: 1.6;
+  color: var(--text-6);
   margin: 0;
 }
 
-.framework-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
-}
-
-.framework-column {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+/* ===== Panel (se tiñe con el framework activo) ===== */
+.ft-panel {
+  --fw: var(--accent-1);
+  position: relative;
+  overflow: hidden;
   border-radius: 24px;
   padding: 32px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+  background:
+    radial-gradient(120% 130% at 0% 0%, color-mix(in srgb, var(--fw) 16%, transparent), transparent 52%),
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--fw) 9%, transparent), transparent 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012));
+  box-shadow: 0 0 40px color-mix(in srgb, var(--fw) 12%, transparent);
+  transition: box-shadow .5s ease, background .5s ease;
 }
 
-.framework-column:hover {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateY(-4px);
-}
-
-.fw-header {
-  margin-bottom: 32px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid;
-}
-
-.fw-header h4 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  position: relative;
-}
-
-.timeline::before {
+.ft-panel::before {
   content: '';
   position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 5px;
-  width: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 0;
+  inset: 0;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(150deg, var(--fw), rgba(255, 255, 255, .08) 50%, color-mix(in srgb, var(--fw) 60%, transparent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: .5;
+  pointer-events: none;
+  transition: background .5s ease;
 }
 
-.timeline-item {
+/* ===== Tabs ===== */
+.ft-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
   position: relative;
-  padding-left: 28px;
   z-index: 1;
 }
 
-.timeline-marker {
+.ft-tab {
+  --fw: var(--accent-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  background: rgba(255, 255, 255, .03);
+  color: var(--text-4);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background .25s, border-color .25s, color .25s, transform .25s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.ft-tab:hover {
+  color: var(--text-1);
+  border-color: color-mix(in srgb, var(--fw) 40%, transparent);
+  transform: translateY(-2px);
+}
+
+.ft-tab.active {
+  color: #fff;
+  border-color: color-mix(in srgb, var(--fw) 55%, transparent);
+  background: color-mix(in srgb, var(--fw) 15%, transparent);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--fw) 20%, transparent);
+}
+
+.ft-tab-logo {
+  display: inline-flex;
+  color: var(--fw);
+  flex-shrink: 0;
+  opacity: .65;
+  transition: opacity .25s;
+}
+
+.ft-tab.active .ft-tab-logo,
+.ft-tab:hover .ft-tab-logo {
+  opacity: 1;
+}
+
+.ft-tab-logo svg {
+  width: 22px;
+  height: 22px;
+}
+
+.ft-tab-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.ft-tab-range {
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .3px;
+  color: var(--text-7);
+  padding-left: 9px;
+  margin-left: 2px;
+  border-left: 1px solid rgba(255, 255, 255, .12);
+}
+
+/* ===== Timeline horizontal ===== */
+.ft-timeline {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.ft-timeline.is-fading {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.ft-node {
+  --fw: inherit;
+  position: relative;
+  flex: 1 0 165px;
+  padding-top: 60px;
+  padding-right: 20px;
+}
+
+/* Conector entre hitos */
+.ft-node:not(:last-child)::before {
+  content: '';
   position: absolute;
+  top: 40px;
+  left: 7px;
+  right: -7px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--fw) 60%, transparent), color-mix(in srgb, var(--fw) 28%, transparent));
+  z-index: 0;
+}
+
+.ft-node-year {
+  position: absolute;
+  top: 0;
   left: 0;
-  top: 6px;
-  width: 11px;
-  height: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ft-year-chip {
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--fw);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--fw) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--fw) 28%, transparent);
+}
+
+.ft-now {
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fw) 60%, transparent);
+}
+
+.ft-dot {
+  position: absolute;
+  top: 34px;
+  left: 0;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: #0A0710;
-  border: 2px solid;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+  background: var(--fw);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fw) 16%, transparent), 0 0 10px color-mix(in srgb, var(--fw) 45%, transparent);
+  z-index: 1;
 }
 
-.timeline-item:hover .timeline-marker {
-  transform: scale(1.3);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+.is-latest .ft-dot {
+  animation: ft-pulse 2.4s infinite;
 }
 
-.timeline-content {
+@keyframes ft-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--fw) 55%, transparent), 0 0 10px color-mix(in srgb, var(--fw) 45%, transparent); }
+  70% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--fw) 0%, transparent), 0 0 10px color-mix(in srgb, var(--fw) 45%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--fw) 0%, transparent), 0 0 10px color-mix(in srgb, var(--fw) 45%, transparent); }
+}
+
+.ft-node-body {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.timeline-year {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.timeline-version {
-  font-size: 16px;
+.ft-version {
+  font-size: 15px;
   font-weight: 700;
   color: #fff;
   letter-spacing: -0.2px;
+  line-height: 1.25;
 }
 
-.timeline-detail {
-  font-size: 14px;
-  color: #9A93A6;
+.ft-detail {
+  font-size: 13px;
+  color: #948CA0;
   line-height: 1.5;
+}
+
+/* ===== Responsive: scroll horizontal en pantallas chicas ===== */
+@media (max-width: 760px) {
+  .ft-panel {
+    padding: 26px 22px 28px;
+  }
+  .ft-timeline {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ft-node {
+    scroll-snap-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-latest .ft-dot { animation: none; }
+  .ft-timeline { transition: opacity .18s ease; }
+  .ft-timeline.is-fading { transform: none; }
 }
