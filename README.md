@@ -35,6 +35,24 @@ lo reemplaza entero. Ningún componente tiene colores de marca hardcodeados.
 Los fondos en canvas (`hero-background`, `stack-background`) no pueden usar `var(--token)`,
 así que leen los acentos del `<body>` con `getComputedStyle` al iniciar.
 
+### Publicar en GitHub Pages
+
+```bash
+npm run deploy
+```
+
+Compila con `--base-href /portfolio2026/` (el sitio vive en un subdirectorio),
+genera un `404.html` idéntico al `index.html` y publica en la rama `gh-pages`.
+
+Ese `404.html` no es un error: GitHub Pages es un servidor estático y no conoce
+las rutas de Angular, así que devuelve 404 al entrar directo a
+`/portfolio2026/fullstack`. Al servir el `404.html`, el router arranca y resuelve
+la ruta igual. Sin él, cualquier link que compartas fuera del home no carga.
+
+Por lo mismo, los enlaces a archivos estáticos (el PDF del CV) van **sin barra
+inicial**: con `base href` en un subdirectorio, un `/` inicial apunta a la raíz
+del dominio.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
 
 ## Development server

@@ -19,7 +19,7 @@ export const FRONTEND_PROFILE: Profile = {
   nav: {
     brandName: 'Ignacio Díaz',
     role: 'Frontend Developer',
-    cvHref: '/cv-ignacio-diaz.pdf',
+    cvHref: 'cv-ignacio-diaz.pdf',
     cvLabel: 'Descargar CV',
     cvDownload: true
   },

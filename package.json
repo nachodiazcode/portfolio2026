@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:pages": "ng build --base-href /portfolio2026/",
+    "deploy": "bash scripts/deploy-gh-pages.sh"
   },
   "private": true,
   "dependencies": {

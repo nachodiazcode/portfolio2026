@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Input() role = '';
   @Input() photo = 'ignacio.png';
   @Input() contact: ContactInfo = CONTACT;
-  @Input() cvHref = '/cv-ignacio-diaz.pdf';
+  @Input() cvHref = 'cv-ignacio-diaz.pdf';
   @Input() cvLabel = 'CV';
   /** true = descarga un archivo; false = navega a una ruta interna. */
   @Input() cvDownload = true;
