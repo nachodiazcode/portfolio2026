@@ -176,7 +176,7 @@ nav.shrunk {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .desktop-only {
     display: none !important;
   }
@@ -194,11 +194,5 @@ nav.shrunk {
   .dock-container {
     padding: 8px 16px;
     gap: 12px;
-  }
-}
-
-@media (min-width: 769px) {
-  .btn-menu {
-    display: none !important;
   }
 }
