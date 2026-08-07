@@ -233,6 +233,13 @@
   .cv-sheet { padding: 22px 18px 28px; }
   .cv-contact { text-align: left; }
   .cv-skill-row { flex-direction: column; gap: 0; }
+
+  /* En columna, el flex-basis de 118px pasa a ser ALTURA y dejaba un hueco
+     vacío entre el título del grupo y sus tecnologías. */
+  .cv-skill-label { flex: 0 0 auto; }
+
+  /* Justificado a ~340px abre ríos de espacio entre palabras. */
+  .cv-summary { text-align: left; }
 }
 
 /* ================= Impresión =================

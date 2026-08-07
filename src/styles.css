@@ -45,6 +45,10 @@
   --text-6: #8B8398;
   --text-7: #6E6678;
   --text-8: #5A5366;
+
+  /* Margen lateral de todas las secciones. Se estrecha solo en pantallas
+     angostas para que el contenido no quede encajonado en un móvil. */
+  --gutter: clamp(18px, 4.5vw, 32px);
 }
 
 body.theme-node {
