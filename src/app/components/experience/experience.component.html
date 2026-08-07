@@ -14,7 +14,7 @@
       <div class="job-timeline-line"></div>
 
       <div style="display: flex; flex-direction: column; gap: 26px;">
-        <div *ngFor="let job of jobs; let i = index" appScrollReveal class="job-row">
+        <div *ngFor="let job of visibleJobs; let i = index" appScrollReveal class="job-row">
           <!-- Node / Letter logo -->
           <div class="job-node"
                [style.padding]="job.logoUrl ? '0' : '2px'"
@@ -49,5 +49,19 @@
       </div>
 
     </div>
+
+    <!-- Desplegar el resto de la trayectoria. Va FUERA del wrapper del timeline:
+         la línea se dibuja de borde a borde de su contenedor y, con el botón
+         dentro, bajaba hasta invadirlo. -->
+    <div *ngIf="hiddenCount > 0 || expanded" class="job-toggle-row">
+      <button class="job-toggle" (click)="toggleExpanded()" (mouseenter)="playHover()" [attr.aria-expanded]="expanded">
+        <span>{{ expanded ? 'Mostrar menos' : 'Ver los ' + hiddenCount + ' trabajos anteriores' }}</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+             [style.transform]="expanded ? 'rotate(180deg)' : 'none'" style="transition: transform .3s cubic-bezier(.16,1,.3,1);">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
   </div>
 </section>

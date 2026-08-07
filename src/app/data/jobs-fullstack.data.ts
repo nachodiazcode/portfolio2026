@@ -38,11 +38,6 @@ export const JOBS_FULLSTACK: Job[] = [
     description: "Desarrollo full-stack de aplicaciones empresariales en Java: servicios REST, integración con sistemas internos y bases de datos relacionales, y mantenimiento de aplicaciones en producción para clientes corporativos. Aquí aprendí lo que cuesta cambiar un sistema que ya está vivo.",
     tech: ["Java", "Spring", "REST APIs", "SQL", "Angular"], logoUrl: "bctecnologia.png" },
 
-  { title: "Técnico en Programación Computacional", company: "Instituto Profesional San Sebastián", dates: "mar. 2016 – mar. 2020", duration: "4 años 1 mes", isDesign: false,
-    description: "Cuatro años donde todo tomó forma: desarrollo de software, bases de datos, testing y metodologías ágiles. Ahí aprendí a modelar datos y a escribir SQL antes de saber qué era una API REST. La práctica profesional la hice en Walmart Chile (2019), mi primer contacto real con un entorno empresarial.",
-    tech: ["Java", "SQL", "PHP", "JavaScript", "HTML5", "CSS3", "Angular"],
-    logoUrl: "ipss.png", projectImageUrl: "diploma-tecnico.jpg", projectTitle: "Técnico en Programación Computacional — Aprobado con Distinción", projectLabel: "Diploma" },
-
   { title: "Desarrollador Front-end (React Native)", company: "Walmart Chile", dates: "abr. 2019 – jul. 2019", duration: "4 meses", isDesign: false,
     description: "Aplicaciones móviles para el ecosistema retail de Walmart, integradas a sus servicios backend: consumo de APIs, manejo de estado con Redux y control de errores de red en escenarios de tráfico alto y conectividad irregular.",
     tech: ["React Native", "Redux", "REST APIs", "JavaScript"], logoUrl: "walmart.png", projectImages: ['walmart-1.png', 'walmart-2.png', 'walmart-3.png'], projectTitle: "Proyectos Walmart" },
