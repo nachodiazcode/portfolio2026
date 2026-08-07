@@ -607,7 +607,10 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 150px;
+  /* minmax y no una altura fija: al angostarse, la bio necesita más líneas de
+     las que caben en una fila y .bento-tile tiene overflow:hidden, así que
+     con alto fijo el texto se recortaba a media línea. */
+  grid-auto-rows: minmax(150px, auto);
   gap: 16px;
   --mx: 50%;
   --my: 0px;
@@ -959,7 +962,7 @@
 @media (max-width: 860px) {
   .bento {
     grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 140px;
+    grid-auto-rows: minmax(140px, auto);
   }
   .bento-photo {
     grid-column: span 2;
@@ -977,8 +980,24 @@
   }
   .bento-bio,
   .bento-dual,
-  .bento-photo {
+  .bento-photo,
+  /* A media columna no cabe "Santiago" junto al reloj ni el texto de estado,
+     y la tarjeta recorta lo que sobra. */
+  .bento-loc,
+  .bento-status {
     grid-column: span 2;
+  }
+}
+
+.site-footer {
+  padding: 84px var(--gutter) 40px;
+}
+
+/* Bajo 1200px la píldora de navegación se ancla al borde inferior y tapaba
+   las últimas líneas del pie. */
+@media (max-width: 1200px) {
+  .site-footer {
+    padding-bottom: 116px;
   }
 }
 

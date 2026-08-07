@@ -17,6 +17,17 @@
   visibility: visible;
 }
 
+/* Fija, no absoluta: el overlay ahora scrollea y "Cerrar" debe seguir visible. */
+.menu-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(var(--bg-0-rgb), .95) 60%, transparent);
+}
+
 .btn-close {
   display: inline-flex;
   align-items: center;
@@ -42,11 +53,21 @@
   z-index: 1;
   max-width: 1400px;
   margin: 0 auto;
-  height: 100%;
-  padding: 120px 40px 60px;
+  min-height: 100%;
+  padding: 108px var(--gutter) 48px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* El overlay ocupa la ventana entera: si los 8 enlaces más el panel de
+   contacto no caben (móvil apaisado, pantallas bajas), debe poder scrollear
+   en vez de recortar los últimos ítems. En X se recorta: los glows de fondo
+   miden 640px y si no, generan scroll horizontal. */
+.menu-overlay {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .menu-grid {
@@ -55,6 +76,32 @@
   gap: 80px;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+@media (max-width: 860px) {
+  .menu-grid {
+    gap: 40px;
+  }
+
+  .menu-panel {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .menu-content-wrapper {
+    padding: 96px var(--gutter) 40px;
+    justify-content: flex-start;
+  }
+
+  .nav-title {
+    margin-bottom: 18px;
+  }
+
+  .menu-link {
+    gap: 16px;
+    letter-spacing: -1px;
+  }
 }
 
 .nav-title {
@@ -132,6 +179,46 @@
 .menu-overlay.open .menu-panel {
   opacity: 1;
   transform: translateY(0);
+}
+
+.contact-email {
+  display: inline-block;
+  font-size: clamp(15px, 1.5vw, 17px);
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  word-break: break-word;
+  transition: color .25s;
+}
+
+.contact-email:hover {
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-mid));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-3);
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--accent-1-rgb), .3);
+  background: rgba(var(--accent-1-rgb), .07);
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--accent-1);
+  box-shadow: 0 0 0 3px rgba(var(--accent-1-rgb), .18);
 }
 
 .social-icon {

@@ -1,3 +1,22 @@
+.edu-row {
+  display: flex;
+  gap: 26px;
+  position: relative;
+}
+
+.edu-node {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .edu-card {
   position: relative;
   overflow: hidden;
@@ -253,5 +272,33 @@
   .cert-row.reverse .cert-visual {
     flex: none;
     transform: rotate(0deg);
+  }
+
+  /* El nodo del timeline al lado de la tarjeta le robaba 90px de ancho,
+     dejándola en ~220px: se apila encima para devolverle el ancho completo. */
+  .edu-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .edu-node {
+    width: 52px;
+    height: 52px;
+  }
+
+  .edu-card {
+    padding: 20px 18px;
+  }
+
+  .edu-title {
+    font-size: 17.5px;
+  }
+
+  .cert-num {
+    font-size: 36px;
+  }
+
+  .cert-name {
+    font-size: 18px;
   }
 }

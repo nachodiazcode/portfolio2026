@@ -1,3 +1,33 @@
+.job-timeline-line {
+  position: absolute;
+  left: 31px;
+  top: 32px;
+  bottom: 40px;
+  width: 2px;
+  background: linear-gradient(var(--accent-1), var(--accent-2));
+  border-radius: 2px;
+  opacity: .55;
+}
+
+.job-row {
+  display: flex;
+  gap: 26px;
+  position: relative;
+}
+
+.job-node {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .job-card {
   position: relative;
   overflow: hidden;
@@ -119,3 +149,35 @@
   transform: scale(1.06);
 }
 
+
+@media (max-width: 720px) {
+  /* El nodo junto a la tarjeta la dejaba en ~220px y partía los cargos en
+     tres líneas: se apila encima y la tarjeta recupera el ancho completo. */
+  .job-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .job-node {
+    width: 52px;
+    height: 52px;
+  }
+
+  /* La línea del timeline se alineaba al centro del nodo de 64px. */
+  .job-timeline-line {
+    display: none;
+  }
+
+  .job-card {
+    padding: 20px 18px;
+  }
+
+  .job-num {
+    font-size: 38px;
+    right: 16px;
+  }
+
+  .job-title {
+    font-size: 18px;
+  }
+}
