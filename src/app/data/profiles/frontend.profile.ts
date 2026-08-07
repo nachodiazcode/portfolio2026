@@ -31,7 +31,7 @@ export const FRONTEND_PROFILE: Profile = {
     subtitleLead: 'Diseñador que aprendió a programar',
     flipWords: ['Frontend & UX', 'Angular Lover ❤️', 'Design Systems', 'Código + Diseño', 'Frontend & UX'],
     bio: 'Vengo del mundo visual, pero me enamoré del código (aunque al principio me costó sudor y lágrimas). Hoy construyo interfaces buscando el equilibrio exacto: que se vean increíbles, pero sobre todo, que funcionen impecable. No soy un "rockstar", creo en hacer la pega bien hecha y en equipo.',
-    photo: 'ignacio.png',
+    photo: 'ignacio.jpg',
     ctaPrimary: { label: 'Ver trayectoria', fragment: 'experiencia' },
     ctaSecondary: { label: 'Hablemos', fragment: 'contacto' },
     floatingTitle: 'UX & Dev',

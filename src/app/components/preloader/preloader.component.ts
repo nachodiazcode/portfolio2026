@@ -19,7 +19,10 @@ export class PreloaderComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     document.body.style.overflow = 'hidden';
-    const duration = 1400;
+    // La app queda lista en ~200ms; la intro solo debe dar un respiro de marca,
+    // no ser la espera. 1400ms + 950ms de fade hacían que el sitio se sintiera
+    // lento cuando en realidad ya había cargado.
+    const duration = 350;
     const start = performance.now();
 
     this.zone.runOutsideAngular(() => {
@@ -38,7 +41,9 @@ export class PreloaderComponent implements AfterViewInit {
             setTimeout(() => {
               this.hidden = true;
               document.body.style.overflow = '';
-            }, 950);
+            // Debe coincidir con la transición del telón en el CSS: si se oculta
+            // antes, el *ngIf lo arranca a media animación.
+            }, 300);
           });
         }
       };

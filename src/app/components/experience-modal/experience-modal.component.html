@@ -13,7 +13,7 @@
           <div style="display: flex; align-items: center; gap: 16px; padding-right: 48px;">
             <!-- Initial circle -->
             <div style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 15px; background: linear-gradient(135deg,var(--accent-1),var(--accent-2)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; letter-spacing: -.5px; box-shadow: 0 10px 26px rgba(var(--accent-1-rgb),.35); overflow: hidden;">
-              <img *ngIf="job.logoUrl" [src]="job.logoUrl" alt="Logo de {{ job.company }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;">
+              <img *ngIf="job.logoUrl" [src]="job.logoUrl" alt="Logo de {{ job.company }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" loading="lazy" decoding="async">
               <span *ngIf="!job.logoUrl">{{ job.company.charAt(0) }}</span>
             </div>
             <div>
@@ -51,7 +51,7 @@
           {{ job.projectLabel || 'Proyecto' }}: {{ job.projectTitle }}
         </div>
         <div class="project-mockup-wrapper">
-          <img [src]="job.projectImageUrl" alt="{{ job.projectLabel || 'Proyecto' }} {{ job.projectTitle }}">
+          <img [src]="job.projectImageUrl" alt="{{ job.projectLabel || 'Proyecto' }} {{ job.projectTitle }}" loading="lazy" decoding="async">
         </div>
       </div>
 
@@ -66,7 +66,7 @@
           <div style="display: flex; transition: transform 0.4s ease-in-out; height: 100%; align-items: center;"
                [style.transform]="'translateX(-' + currentImageIndex * 100 + '%)'">
             <img *ngFor="let img of job.projectImages" [src]="img" alt="Captura de pantalla del proyecto {{ job.projectTitle }}" 
-                 style="width: 100%; flex-shrink: 0; display: block; object-fit: contain; max-height: 380px;">
+                 style="width: 100%; flex-shrink: 0; display: block; object-fit: contain; max-height: 380px;" loading="lazy" decoding="async">
           </div>
           
           <!-- Controls -->

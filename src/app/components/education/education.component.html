@@ -15,7 +15,7 @@
         <div class="edu-node"
              [style.background]="edu.logoUrl ? 'rgba(255, 255, 255, 0.05)' : 'linear-gradient(135deg,var(--accent-1),var(--accent-2))'"
              [style.box-shadow]="edu.logoUrl ? '0 0 0 5px var(--bg-1), 0 0 0 6px rgba(255, 255, 255, 0.12)' : '0 0 0 5px var(--bg-1)'">
-          <img *ngIf="edu.logoUrl" [src]="edu.logoUrl" alt="Logo de {{ edu.institution }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+          <img *ngIf="edu.logoUrl" [src]="edu.logoUrl" alt="Logo de {{ edu.institution }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" loading="lazy" decoding="async">
           <svg *ngIf="!edu.logoUrl" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
         </div>
 
@@ -42,7 +42,7 @@
           </div>
 
           <div *ngIf="edu.diplomaUrl" class="edu-diploma">
-            <img [src]="edu.diplomaUrl" alt="Diploma {{ edu.degree }}">
+            <img [src]="edu.diplomaUrl" alt="Diploma {{ edu.degree }}" loading="lazy" decoding="async">
           </div>
         </article>
 
@@ -60,7 +60,7 @@
 
         <!-- Visual: certificado o placeholder -->
         <div class="cert-visual">
-          <img *ngIf="cert.imageUrl" [src]="cert.imageUrl" alt="Certificado {{ cert.name }}">
+          <img *ngIf="cert.imageUrl" [src]="cert.imageUrl" alt="Certificado {{ cert.name }}" loading="lazy" decoding="async">
           <div *ngIf="!cert.imageUrl" class="cert-placeholder">
             <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
             <span>{{ cert.issuer }}</span>

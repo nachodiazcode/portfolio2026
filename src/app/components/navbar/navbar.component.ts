@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @Input() soundEnabled = true;
   @Input() brandName = 'Ignacio Díaz';
   @Input() role = '';
-  @Input() photo = 'ignacio.png';
+  @Input() photo = 'ignacio.jpg';
   @Input() contact: ContactInfo = CONTACT;
   @Input() cvHref = 'cv-ignacio-diaz.pdf';
   @Input() cvLabel = 'CV';
