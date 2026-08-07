@@ -21,7 +21,7 @@
                [style.background]="job.logoUrl ? 'rgba(255, 255, 255, 0.05)' : 'linear-gradient(135deg,var(--accent-1),var(--accent-2))'"
                [style.box-shadow]="job.logoUrl ? '0 0 0 5px var(--bg-0), 0 0 0 6px rgba(255, 255, 255, 0.12)' : '0 0 0 5px var(--bg-0)'">
             <div style="position: relative; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-              <img *ngIf="job.logoUrl" [src]="job.logoUrl" alt="Logo de {{ job.company }}" [style.transform]="(job.logoScale || job.logoOffsetY) ? 'translateY(' + (job.logoOffsetY || 0) + '%) scale(' + (job.logoScale || 1) + ')' : 'none'" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; transition: transform 0.3s;">
+              <img *ngIf="job.logoUrl" [src]="job.logoUrl" alt="Logo de {{ job.company }}" [style.transform]="(job.logoScale || job.logoOffsetY) ? 'translateY(' + (job.logoOffsetY || 0) + '%) scale(' + (job.logoScale || 1) + ')' : 'none'" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; transition: transform 0.3s;" loading="lazy" decoding="async">
               <span *ngIf="!job.logoUrl" style="position: absolute; font-size: 21px; font-weight: 800; color: #fff; opacity: .92;">{{ job.company.charAt(0) }}</span>
             </div>
           </div>

@@ -16,7 +16,7 @@ import { CONTACT } from '../../data/contact.data';
 export class MenuOverlayComponent implements OnChanges, OnDestroy {
   @Input() isOpen = false;
   @Input() brandName = 'Ignacio Díaz';
-  @Input() photo = 'ignacio.png';
+  @Input() photo = 'ignacio.jpg';
   @Input() contact: ContactInfo = CONTACT;
   @Input() badge = 'Disponible para nuevos proyectos';
   @Output() closed = new EventEmitter<void>();

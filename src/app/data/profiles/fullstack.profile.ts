@@ -31,7 +31,7 @@ export const FULLSTACK_PROFILE: Profile = {
     subtitleLead: 'Del modelo de datos al deploy',
     flipWords: ['Node.js & Spring Boot', 'APIs que se entienden', 'PostgreSQL · MongoDB', 'Docker · AWS · CI/CD', 'Node.js & Spring Boot'],
     bio: 'Construyo el producto completo: diseño el modelo de datos, levanto la API, la documento para que otro la pueda usar sin llamarme, y después me siento en el front a consumirla. Me gusta el backend porque no perdona: o el contrato está claro y el sistema aguanta, o no. Nada de humo.',
-    photo: 'ignacio.png',
+    photo: 'ignacio.jpg',
     ctaPrimary: { label: 'Ver trayectoria', fragment: 'experiencia' },
     ctaSecondary: { label: 'Hablemos', fragment: 'contacto' },
     floatingTitle: 'Full-Stack',

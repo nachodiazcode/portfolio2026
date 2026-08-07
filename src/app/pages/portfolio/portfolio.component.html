@@ -77,7 +77,7 @@
         <div class="photo-glow"></div>
         <div class="photo-border" appTilt>
           <div style="border-radius: 23px; overflow: hidden; background: var(--bg-0);">
-            <img [src]="profile.hero.photo" [alt]="profile.nav.brandName" class="hero-photo" style="display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center 15%;">
+            <img [src]="profile.hero.photo" [alt]="profile.nav.brandName" class="hero-photo" fetchpriority="high" decoding="async" style="display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center 15%;">
           </div>
         </div>
         <div class="experience-floating-card">
@@ -169,7 +169,7 @@
 
         <!-- Foto (grande, ancla) -->
         <div appScrollReveal class="bento-tile bento-photo" appTilt [tiltMax]="5">
-          <img [src]="profile.about.photo" [alt]="profile.about.photoAlt" class="bento-photo-img">
+          <img [src]="profile.about.photo" [alt]="profile.about.photoAlt" class="bento-photo-img" loading="lazy" decoding="async">
           <div class="bento-scanlines"></div>
           <div class="bento-hud-tag">{{ profile.about.hudTag }}</div>
           <div class="bento-photo-badge">

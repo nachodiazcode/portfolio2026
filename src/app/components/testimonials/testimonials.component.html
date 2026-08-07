@@ -14,7 +14,7 @@
         <blockquote class="testimonial-quote">{{ t.quote }}</blockquote>
         <figcaption class="testimonial-author">
           <div class="author-avatar">
-            <img *ngIf="t.avatarUrl" [src]="t.avatarUrl" alt="Foto de {{ t.name }}">
+            <img *ngIf="t.avatarUrl" [src]="t.avatarUrl" alt="Foto de {{ t.name }}" loading="lazy" decoding="async">
             <span *ngIf="!t.avatarUrl">{{ t.initial }}</span>
           </div>
           <div style="min-width: 0;">

@@ -6,7 +6,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform .9s cubic-bezier(.76, 0, .24, 1);
+  /* .3s, no .9s: el telón era la mayor parte de los 2,35s que el sitio tardaba
+     en aparecer. Va sincronizado con el setTimeout del componente. */
+  transition: transform .3s cubic-bezier(.76, 0, .24, 1);
 }
 
 /* telón: se levanta hacia arriba al terminar */
