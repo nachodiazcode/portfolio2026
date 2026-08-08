@@ -21,7 +21,7 @@ export class ExperienceComponent {
 
   /** Con 15 cargos la sección ocupaba un tercio de la página (6,4 pantallas
    *  seguidas). Se muestran los más recientes y el resto queda a un clic. */
-  @Input() initialCount = 6;
+  @Input() initialCount = 4;
   expanded = false;
 
   constructor(private audioService: AudioService) {}
