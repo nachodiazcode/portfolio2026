@@ -41,6 +41,17 @@ export const UXUI_PROFILE: Profile = {
     subtitleLead: 'Diseñador que aprendió a programar',
     flipWords: ['UX / UI', 'Research', 'Design Systems', 'Prototipado', 'UX / UI'],
     bio: 'Empecé dibujando interfaces y terminé programándolas. Esa vuelta me dejó una manía útil: no propongo una pantalla sin saber cómo se va a construir, ni escribo un componente sin preguntarme a quién le va a tocar usarlo. Todo esto empieza en un cuaderno.',
+
+    /*
+     * Para el retrato ilustrado: deja el archivo en public/ (por ejemplo
+     * ignacio-ilustrado.png) y cambia solo esta línea. Los otros dos perfiles
+     * tienen su propio campo, así que ninguno se ve afectado.
+     *
+     * Intenté generarlo por CSS con la receta del boceto (copia invertida y
+     * desenfocada mezclada con color-dodge) y no da: esta foto es demasiado
+     * contrastada y el resultado se solariza. Un retrato dibujado de verdad
+     * hay que hacerlo fuera.
+     */
     photo: 'ignacio.jpg',
     ctaPrimary: { label: 'Ver trayectoria', fragment: 'experiencia' },
     ctaSecondary: { label: 'Hablemos', fragment: 'contacto' },

@@ -321,18 +321,25 @@ body.theme-sketch {
   /* Tinta: grafito. Voltear esto invierte los 140 bordes de una sola vez. */
   --ink-rgb: 41, 37, 36;
 
-  /* Acentos: lápiz azul de bocetar y rojo de corrección */
-  --accent-1: #2563EB;
-  --accent-2: #E11D48;
-  --accent-mid: #7C3AED;
-  --accent-soft: #60A5FA;
-  --accent-warm: #F97316;
-  --accent-pale: #DBEAFE;
-  --accent-1-rgb: 37, 99, 235;
-  --accent-2-rgb: 225, 29, 72;
-  --accent-mid-rgb: 124, 58, 237;
-  --accent-soft-rgb: 96, 165, 250;
-  --accent-pale-rgb: 219, 234, 254;
+  /* Acentos: todo grafito. Un lápiz no cambia de color, así que la jerarquía
+     no la da el tono sino la presión del trazo — del 6B casi negro al 2H
+     apenas visible. El grafito real tira a frío, no a gris neutro. */
+  --accent-1: #3F3F46;
+  --accent-2: #71717A;
+  --accent-mid: #52525B;
+  --accent-soft: #A1A1AA;
+  --accent-warm: #52525B;
+  --accent-pale: #E4E4E7;
+  --accent-1-rgb: 63, 63, 70;
+  --accent-2-rgb: 113, 113, 122;
+  --accent-mid-rgb: 82, 82, 91;
+  --accent-soft-rgb: 161, 161, 170;
+  --accent-pale-rgb: 228, 228, 231;
+
+  /* Los rellenos de acento pasan a ser grafito medio-oscuro, así que el
+     texto encima sigue siendo claro — pero blanco roto, no blanco puro:
+     sobre papel, el blanco puro se ve como un agujero. */
+  --on-accent: #FAFAF9;
 
   /* Escala de texto invertida: --text-1 sigue siendo el más contrastado,
      solo que ahora eso significa el grafito más oscuro, no el blanco. */
@@ -517,14 +524,26 @@ body.theme-sketch .principio-num {
   -webkit-text-stroke: 1.5px rgba(var(--ink-rgb), .28);
 }
 
-/* Fotos en escala de grises: en un wireframe las imágenes van sin definir.
+/* ── La foto ────────────────────────────────────────────────────────────
+   Probé el truco clásico del boceto (copia invertida + desenfoque mezclada
+   con color-dodge) y no funciona con esta foto: al ser muy contrastada
+   —polerón negro sobre fondo oscuro— o se solariza o queda en una foto gris
+   lavada. Un retrato realmente ilustrado hay que dibujarlo fuera.
+
+   El sitio ya está listo para recibirlo: hero.photo es un campo por perfil,
+   así que basta apuntar el de /uxui a la versión ilustrada sin tocar a los
+   otros dos.
+
    La del hero tiene una animación infinita (photoDuotone) que va cambiando
-   el filtro; una declaración estática no le gana, hay que detenerla. */
+   el filtro; una declaración estática no le gana, hay que pararla. */
 body.theme-sketch .hero-photo {
   animation: none !important;
 }
 
-body.theme-sketch .hero-photo,
+body.theme-sketch .hero-photo {
+  filter: grayscale(1) contrast(1.08);
+}
+
 body.theme-sketch .project-card img,
 body.theme-sketch .bento-photo {
   filter: grayscale(1) contrast(1.08);
