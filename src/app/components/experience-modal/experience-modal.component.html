@@ -9,15 +9,15 @@
     <div class="modal-layout-wrapper">
       <div class="modal-info-column">
         <!-- Modal Header -->
-        <div style="padding: 32px 32px 24px; border-bottom: 1px solid rgba(255,255,255,.08);">
+        <div style="padding: 32px 32px 24px; border-bottom: 1px solid rgba(var(--ink-rgb),.08);">
           <div style="display: flex; align-items: center; gap: 16px; padding-right: 48px;">
             <!-- Initial circle -->
-            <div style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 15px; background: linear-gradient(135deg,var(--accent-1),var(--accent-2)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; letter-spacing: -.5px; box-shadow: 0 10px 26px rgba(var(--accent-1-rgb),.35); overflow: hidden;">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 15px; background: linear-gradient(135deg,var(--accent-1),var(--accent-2)); color: var(--text-strong); display: flex; align-items: center; justify-content: center; font-size: 23px; font-weight: 800; letter-spacing: -.5px; box-shadow: 0 10px 26px rgba(var(--accent-1-rgb),.35); overflow: hidden;">
               <img *ngIf="job.logoUrl" [src]="job.logoUrl" alt="Logo de {{ job.company }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px;" loading="lazy" decoding="async">
               <span *ngIf="!job.logoUrl">{{ job.company.charAt(0) }}</span>
             </div>
             <div>
-              <h3 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; letter-spacing: -.6px; color: #fff;">{{ job.title }}</h3>
+              <h3 style="margin: 0 0 4px; font-size: 22px; font-weight: 800; letter-spacing: -.6px; color: var(--text-strong);">{{ job.title }}</h3>
               <div style="font-size: 15px; font-weight: 600; background: linear-gradient(120deg,var(--accent-1),var(--accent-mid)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; display: inline-block;">{{ job.company }}</div>
             </div>
           </div>

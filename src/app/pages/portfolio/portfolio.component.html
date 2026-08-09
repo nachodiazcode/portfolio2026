@@ -1,5 +1,18 @@
 <div style="font-family: Inter, system-ui, -apple-system, sans-serif; background: var(--bg-0); color: var(--text-1); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; position: relative;">
 
+  <!-- Filtro del trazo a mano (tema cuaderno).
+       feTurbulence genera ruido y feDisplacementMap lo usa para empujar cada
+       píxel del borde unos pocos puntos: eso es lo que hace que una línea
+       recta de CSS parezca trazada a pulso. Sin él, el tema sería un tema
+       claro más. Va aquí y no en index.html porque el filtro solo lo usan
+       elementos de esta página. -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <filter id="sketch-wobble">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="ruido" seed="7"></feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="ruido" scale="3" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+    </filter>
+  </svg>
+
   <!-- Preloader -->
   <app-preloader></app-preloader>
 
@@ -7,8 +20,8 @@
   <app-cursor></app-cursor>
 
   <!-- Ambient Glows -->
-  <div style="position: absolute; top: -180px; right: -120px; width: 680px; height: 680px; background: radial-gradient(circle, rgba(var(--accent-1-rgb),.16), transparent 62%); pointer-events: none; z-index: 0;"></div>
-  <div style="position: absolute; top: 320px; left: -200px; width: 620px; height: 620px; background: radial-gradient(circle, rgba(var(--accent-2-rgb),.14), transparent 64%); pointer-events: none; z-index: 0;"></div>
+  <div class="ambient-glow" style="position: absolute; top: -180px; right: -120px; width: 680px; height: 680px; background: radial-gradient(circle, rgba(var(--accent-1-rgb),.16), transparent 62%); pointer-events: none; z-index: 0;"></div>
+  <div class="ambient-glow" style="position: absolute; top: 320px; left: -200px; width: 620px; height: 620px; background: radial-gradient(circle, rgba(var(--accent-2-rgb),.14), transparent 64%); pointer-events: none; z-index: 0;"></div>
 
   <!-- Navbar -->
   <app-navbar
@@ -150,7 +163,7 @@
   </section>
 
   <!-- ============ SOBRE MÍ ============ -->
-  <section id="sobre-mi" style="position: relative; z-index: 1; padding: 52px var(--gutter) 96px; background: var(--bg-1); border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); overflow: hidden;">
+  <section id="sobre-mi" style="position: relative; z-index: 1; padding: 52px var(--gutter) 96px; background: var(--bg-1); border-top: 1px solid rgba(var(--ink-rgb),.06); border-bottom: 1px solid rgba(var(--ink-rgb),.06); overflow: hidden;">
 
     <!-- Fondo animado de partículas (continuidad) -->
     <app-hero-background [showGrid]="false"></app-hero-background>
@@ -160,7 +173,7 @@
       <!-- Header (mismo patrón que Educación/Experiencia) -->
       <div appScrollReveal style="margin-bottom: 24px; max-width: 660px;">
         <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(120deg,var(--accent-1),var(--accent-mid)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 8px;">{{ profile.about.eyebrow }}</div>
-        <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0; line-height: 1; color: #fff;">{{ profile.about.title }}</h2>
+        <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0; line-height: 1; color: var(--text-strong);">{{ profile.about.title }}</h2>
       </div>
 
       <!-- Bento grid -->
@@ -232,7 +245,7 @@
     <div style="max-width: 1180px; margin: 0 auto; position: relative; z-index: 1;">
       <div appScrollReveal style="margin-bottom: 48px; max-width: 660px;">
         <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(120deg,var(--accent-1),var(--accent-mid)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 8px;">{{ profile.stack.eyebrow }}</div>
-        <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 12px; line-height: 1; color: #fff;">{{ profile.stack.title }}</h2>
+        <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 12px; line-height: 1; color: var(--text-strong);">{{ profile.stack.title }}</h2>
         <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-6);">{{ profile.stack.description }}</p>
       </div>
       <div class="stack-grid" appSpotlight>
@@ -284,7 +297,7 @@
   <app-testimonials></app-testimonials>
 
   <!-- ============ EVOLUCIÓN TECNOLÓGICA ============ -->
-  <section id="evolucion" style="position: relative; z-index: 1; padding: 96px var(--gutter); background: var(--bg-0); border-top: 1px solid rgba(255,255,255,.06);">
+  <section id="evolucion" style="position: relative; z-index: 1; padding: 96px var(--gutter); background: var(--bg-0); border-top: 1px solid rgba(var(--ink-rgb),.06);">
     <app-framework-versions [frameworks]="profile.techEvolution.tracks"></app-framework-versions>
   </section>
 
@@ -292,11 +305,11 @@
   <app-experience-modal [job]="selectedJob" (closed)="closeModal()"></app-experience-modal>
 
   <!-- ============ FOOTER ============ -->
-  <footer id="contacto" class="site-footer" style="position: relative; z-index: 1; background: var(--bg-1); border-top: 1px solid rgba(255,255,255,.07);">
+  <footer id="contacto" class="site-footer" style="position: relative; z-index: 1; background: var(--bg-1); border-top: 1px solid rgba(var(--ink-rgb),.07);">
     <div style="max-width: 1180px; margin: 0 auto;">
-      <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1);">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between; padding-bottom: 48px; border-bottom: 1px solid rgba(var(--ink-rgb),.1);">
         <div>
-          <h2 style="font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 10px; line-height: 1.05; color: #fff;">{{ profile.footer.headingLead }}<br><span class="gradient-text">{{ profile.footer.headingAccent }}</span></h2>
+          <h2 style="font-size: clamp(30px, 4.5vw, 46px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 10px; line-height: 1.05; color: var(--text-strong);">{{ profile.footer.headingLead }}<br><span class="gradient-text">{{ profile.footer.headingAccent }}</span></h2>
           <p style="font-size: 16px; color: var(--text-6); margin: 0 0 20px; max-width: 440px;">{{ profile.footer.description }}</p>
           <a [href]="'mailto:' + profile.contact.email" (mouseenter)="playHover()" (click)="playClick()" style="display: inline-flex; align-items: center; gap: 10px; color: var(--text-2); text-decoration: none; font-size: 18px; font-weight: 600; transition: color .2s;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -315,10 +328,10 @@
           </a>
         </div>
       </div>
-      <!-- Puente entre los dos universos -->
-      <div style="padding-top: 28px;">
-        <a [routerLink]="profile.crossLink.route" (mouseenter)="playHover()" (click)="playClick()" class="cross-link">
-          {{ profile.crossLink.label }}
+      <!-- Puentes hacia los otros universos -->
+      <div style="padding-top: 28px; display: flex; flex-wrap: wrap; gap: 14px;">
+        <a *ngFor="let cl of profile.crossLinks" [routerLink]="cl.route" (mouseenter)="playHover()" (click)="playClick()" class="cross-link">
+          {{ cl.label }}
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>

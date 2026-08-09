@@ -31,8 +31,17 @@
   --accent-mid-rgb: 177, 75, 240;
   --accent-soft-rgb: 255, 158, 196;
   --accent-pale-rgb: 255, 214, 232;
-  /* Texto legible ENCIMA de un fondo de acento */
+  /* Texto legible ENCIMA de un fondo de acento. No cambia entre temas:
+     los acentos siguen saturados en los tres perfiles. */
   --on-accent: #ffffff;
+
+  /* Tinta: el color con el que se dibujan bordes, separadores y rellenos
+     sutiles. Estaba escrito a mano como rgba(255,255,255,X) en 140 sitios,
+     lo que hacía imposible un tema claro. Ahora basta con voltear esta
+     variable para que toda la interfaz se invierta. */
+  --ink-rgb: 255, 255, 255;
+  /* Texto de máximo contraste (títulos). Antes era #fff literal. */
+  --text-strong: #ffffff;
   /* Tipografía de datos (se vuelve monoespaciada en el universo full-stack) */
   --font-data: 'Inter', system-ui, -apple-system, sans-serif;
 
@@ -204,7 +213,7 @@ body {
   background: var(--bg-0);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--ink-rgb), 0.1);
   border-radius: 99px;
   border: 2px solid var(--bg-0);
 }
@@ -289,4 +298,293 @@ body {
     background: #fff !important;
     border-color: #555 !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   TEMA CUADERNO — perfil UX/UI (/uxui)
+
+   Un wireframe dibujado a mano sobre papel cuadriculado. Es el único tema
+   claro, así que voltea --ink-rgb: todo lo que en los otros perfiles es un
+   borde blanco translúcido pasa a ser un trazo de grafito.
+   ═══════════════════════════════════════════════════════════════════════ */
+body.theme-sketch {
+  /* Papel: crema, no blanco puro — el blanco puro cansa y no parece papel */
+  --bg-0: #FAF7EF;
+  --bg-1: #F5F1E6;
+  --bg-2: #FFFDF7;
+  --bg-3: #EFEADC;
+  --bg-deep: #F2EDE0;
+  --bg-0-rgb: 250, 247, 239;
+  --bg-2-rgb: 255, 253, 247;
+  --bg-deepest-rgb: 242, 237, 224;
+
+  /* Tinta: grafito. Voltear esto invierte los 140 bordes de una sola vez. */
+  --ink-rgb: 41, 37, 36;
+
+  /* Acentos: lápiz azul de bocetar y rojo de corrección */
+  --accent-1: #2563EB;
+  --accent-2: #E11D48;
+  --accent-mid: #7C3AED;
+  --accent-soft: #60A5FA;
+  --accent-warm: #F97316;
+  --accent-pale: #DBEAFE;
+  --accent-1-rgb: 37, 99, 235;
+  --accent-2-rgb: 225, 29, 72;
+  --accent-mid-rgb: 124, 58, 237;
+  --accent-soft-rgb: 96, 165, 250;
+  --accent-pale-rgb: 219, 234, 254;
+
+  /* Escala de texto invertida: --text-1 sigue siendo el más contrastado,
+     solo que ahora eso significa el grafito más oscuro, no el blanco. */
+  --text-1: #1C1917;
+  --text-2: #292524;
+  --text-3: #44403C;
+  --text-4: #57534E;
+  --text-5: #57534E;
+  --text-6: #57534E;
+  --text-7: #78716C;
+  --text-8: #A8A29E;
+  --text-strong: #1C1917;
+
+  --font-data: 'Architects Daughter', 'Comic Sans MS', cursive;
+
+  /* Manuscritas del tema */
+  --font-hand: 'Caveat', 'Segoe Script', cursive;
+  --font-sketch: 'Architects Daughter', 'Comic Sans MS', cursive;
+
+  /* El papel cuadriculado. Dos capas de líneas de 1px sobre el crema. */
+  background-color: var(--bg-0);
+  background-image:
+    linear-gradient(rgba(var(--ink-rgb), .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--ink-rgb), .055) 1px, transparent 1px);
+  background-size: 26px 26px;
+  color: var(--text-2);
+}
+
+/* ── Tipografía manuscrita ──────────────────────────────────────────────
+   El cuerpo se queda en Inter: un portafolio tiene que poder leerse. La
+   manuscrita va en títulos, cifras y etiquetas, que es donde se nota. */
+body.theme-sketch .hero-name,
+body.theme-sketch h2,
+body.theme-sketch h3,
+body.theme-sketch .filosofia-quote,
+body.theme-sketch .pre-name,
+body.theme-sketch .menu-link,
+body.theme-sketch .brand-name,
+body.theme-sketch .filosofia-watermark {
+  font-family: var(--font-hand);
+  letter-spacing: 0;
+}
+
+/* Caveat es más estrecha y baja que Inter: sin subirle el tamaño y el peso
+   los títulos se ven anémicos donde antes había una tipografía de 800. */
+body.theme-sketch .hero-name {
+  font-size: clamp(64px, 11vw, 128px);
+  font-weight: 700;
+  line-height: .92;
+}
+
+body.theme-sketch h2 {
+  font-size: clamp(40px, 6vw, 62px) !important;
+  font-weight: 700;
+}
+
+body.theme-sketch .status-badge,
+body.theme-sketch .location-text,
+body.theme-sketch .tech-pill,
+body.theme-sketch .stack-pill,
+body.theme-sketch .stack-count,
+body.theme-sketch .job-meta,
+body.theme-sketch .job-num,
+body.theme-sketch .project-year,
+body.theme-sketch .principio-num,
+body.theme-sketch .stat-num,
+body.theme-sketch .bento-hud-tag,
+body.theme-sketch .bento-loc-clock,
+body.theme-sketch .timeline-year,
+body.theme-sketch .job-toggle,
+body.theme-sketch .btn-primary,
+body.theme-sketch .btn-secondary,
+body.theme-sketch .dock-link {
+  font-family: var(--font-sketch);
+}
+
+/* ── Trazo dibujado a mano ──────────────────────────────────────────────
+   El truco: un filtro SVG de turbulencia (definido en portfolio.component
+   .html) desplaza los píxeles del borde y lo deja tembloroso, como trazado
+   con lápiz. Se aplica solo al borde vía ::before, no al contenido: pasar
+   el filtro a toda la tarjeta también deformaría el texto y las fotos. */
+body.theme-sketch .job-card,
+body.theme-sketch .stack-card,
+body.theme-sketch .project-card,
+body.theme-sketch .bento-tile,
+body.theme-sketch .edu-card,
+body.theme-sketch .cert-card,
+body.theme-sketch .testimonial-card,
+body.theme-sketch .experience-floating-card,
+body.theme-sketch .photo-border {
+  position: relative;
+  border-color: transparent !important;
+  background: var(--bg-2);
+  box-shadow: none !important;
+  border-radius: 4px;
+}
+
+body.theme-sketch .job-card::before,
+body.theme-sketch .stack-card::before,
+body.theme-sketch .project-card::before,
+body.theme-sketch .bento-tile::before,
+body.theme-sketch .edu-card::before,
+body.theme-sketch .cert-card::before,
+body.theme-sketch .testimonial-card::before,
+body.theme-sketch .experience-floating-card::before,
+body.theme-sketch .photo-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(var(--ink-rgb), .82);
+  border-radius: 5px;
+  filter: url(#sketch-wobble);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Al pasar el cursor el trazo se remarca, como repasar una línea a lápiz */
+body.theme-sketch .job-card:hover::before,
+body.theme-sketch .project-card:hover::before,
+body.theme-sketch .stack-card:hover::before {
+  border-color: var(--accent-1);
+  border-width: 2.5px;
+}
+
+/* Botones: caja dibujada, sin degradados */
+body.theme-sketch .btn-primary,
+body.theme-sketch .btn-secondary,
+body.theme-sketch .job-toggle,
+body.theme-sketch .btn-primary-dock {
+  position: relative;
+  background: var(--bg-2) !important;
+  color: var(--text-1) !important;
+  border: 2px solid rgba(var(--ink-rgb), .85) !important;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 rgba(var(--ink-rgb), .82) !important;
+  filter: url(#sketch-wobble);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+/* Al pulsar, el botón "se hunde" sobre su propia sombra */
+body.theme-sketch .btn-primary:active,
+body.theme-sketch .btn-secondary:active,
+body.theme-sketch .job-toggle:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 rgba(var(--ink-rgb), .82) !important;
+}
+
+body.theme-sketch .btn-primary {
+  background: var(--accent-pale) !important;
+}
+
+/* Píldoras y etiquetas: contorno a lápiz en vez de relleno translúcido */
+body.theme-sketch .tech-pill,
+body.theme-sketch .stack-pill,
+body.theme-sketch .job-meta,
+body.theme-sketch .status-badge,
+body.theme-sketch .dock-container {
+  background: transparent !important;
+  border: 1.5px solid rgba(var(--ink-rgb), .55) !important;
+  border-radius: 999px;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body.theme-sketch .dock-container {
+  background: rgba(var(--bg-2-rgb), .92) !important;
+  box-shadow: 3px 3px 0 rgba(var(--ink-rgb), .5) !important;
+}
+
+/* Líneas de separación: guiones, como una línea trazada a pulso */
+body.theme-sketch .job-timeline-line,
+body.theme-sketch .edu-timeline-line {
+  background: none !important;
+  border-left: 2px dashed rgba(var(--ink-rgb), .45);
+  width: 0 !important;
+}
+
+/* El número gigante de cada trabajo, a contorno en vez de relleno */
+body.theme-sketch .job-num,
+body.theme-sketch .principio-num {
+  color: transparent !important;
+  -webkit-text-stroke: 1.5px rgba(var(--ink-rgb), .28);
+}
+
+/* Fotos en escala de grises: en un wireframe las imágenes van sin definir.
+   La del hero tiene una animación infinita (photoDuotone) que va cambiando
+   el filtro; una declaración estática no le gana, hay que detenerla. */
+body.theme-sketch .hero-photo {
+  animation: none !important;
+}
+
+body.theme-sketch .hero-photo,
+body.theme-sketch .project-card img,
+body.theme-sketch .bento-photo {
+  filter: grayscale(1) contrast(1.08);
+}
+
+body.theme-sketch .hero-photo:hover,
+body.theme-sketch .project-card:hover img {
+  filter: grayscale(0);
+}
+
+/* ── Fondos animados y cursor ───────────────────────────────────────────
+   El hero dibuja una constelación de partículas y una grilla synthwave.
+   Leen los acentos de la variable, así que se pintarían en azul sobre el
+   papel, pero una constelación no pega en un cuaderno: la textura aquí es
+   la cuadrícula. Se ocultan, y de paso se ahorra el canvas animado. */
+body.theme-sketch app-hero-background,
+body.theme-sketch app-stack-background,
+body.theme-sketch .ambient-glow,
+body.theme-sketch .photo-glow {
+  display: none !important;
+}
+
+/* El cursor personalizado se dibuja en blanco: invisible sobre papel. */
+body.theme-sketch app-cursor svg {
+  fill: rgba(var(--ink-rgb), .85);
+  stroke: rgba(var(--ink-rgb), .85);
+}
+
+/* Secciones con degradado oscuro: sobre papel deben ser papel. */
+body.theme-sketch section,
+body.theme-sketch header,
+body.theme-sketch footer {
+  background: transparent !important;
+}
+
+/* El preloader ocupa toda la pantalla: sin esto arranca en negro y el
+   cuaderno aparece de golpe. */
+body.theme-sketch .preloader {
+  background: var(--bg-0);
+}
+
+/* La marquesina de tecnologías, como una tira de cinta pegada al papel */
+body.theme-sketch .marquee {
+  background: var(--bg-3) !important;
+  border-top: 2px dashed rgba(var(--ink-rgb), .4);
+  border-bottom: 2px dashed rgba(var(--ink-rgb), .4);
+}
+
+/* Overlay del menú: hoja opaca, no cristal esmerilado */
+body.theme-sketch .menu-overlay {
+  background: var(--bg-0) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Texto con degradado de acento (los "eyebrow" de cada sección). El recorte
+   sobre papel deja el texto casi invisible, así que se vuelve tinta plana. */
+body.theme-sketch [style*="background-clip: text"],
+body.theme-sketch .accent-text {
+  -webkit-text-fill-color: var(--accent-1) !important;
+  color: var(--accent-1) !important;
+  background: none !important;
 }

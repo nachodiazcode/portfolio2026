@@ -3,9 +3,9 @@
   z-index: 1;
   overflow: hidden;
   padding: 26px 0;
-  border-top: 1px solid rgba(255, 255, 255, .06);
-  border-bottom: 1px solid rgba(255, 255, 255, .06);
-  background: rgba(255, 255, 255, .015);
+  border-top: 1px solid rgba(var(--ink-rgb), .06);
+  border-bottom: 1px solid rgba(var(--ink-rgb), .06);
+  background: rgba(var(--ink-rgb), .015);
   /* desvanece los extremos */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
@@ -38,7 +38,7 @@
   letter-spacing: -1px;
   white-space: nowrap;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, .3);
+  -webkit-text-stroke: 1px rgba(var(--ink-rgb), .3);
   transition: -webkit-text-stroke-color .3s;
 }
 

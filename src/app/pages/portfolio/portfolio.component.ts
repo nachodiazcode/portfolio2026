@@ -97,6 +97,11 @@ export class PortfolioComponent implements OnInit, OnDestroy {
       document.body.classList.add(this.profile.themeClass);
     }
 
+    // Las fuentes propias de un perfil se cargan solo cuando ese perfil se
+    // visita. El tema cuaderno necesita manuscritas que no pintan nada en los
+    // otros dos, y meterlas en index.html les cobraría la descarga a todos.
+    this.injectProfileFonts();
+
     // Numeración e inicial de cada empresa para el timeline
     this.jobs = this.profile.experience.jobs.map((job, i) => ({
       ...job,
@@ -113,6 +118,19 @@ export class PortfolioComponent implements OnInit, OnDestroy {
     if (this.profile.themeClass) {
       document.body.classList.remove(this.profile.themeClass);
     }
+  }
+
+  /** Añade el <link> de fuentes del perfil, si lo declara y no está ya puesto. */
+  private injectProfileFonts(): void {
+    const href = this.profile.fontsHref;
+    if (!href || document.head.querySelector(`link[href="${href}"]`)) return;
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
+    // No se retira en ngOnDestroy a propósito: si el visitante vuelve a este
+    // perfil, la hoja ya está y no hay un segundo parpadeo de fuente.
   }
 
   /** "Santiago" y "Chile" salen de contact.location ("Santiago, Chile"). */

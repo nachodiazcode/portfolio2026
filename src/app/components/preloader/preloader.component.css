@@ -37,8 +37,8 @@
   font-size: clamp(30px, 5.5vw, 58px);
   font-weight: 900;
   letter-spacing: -2px;
-  color: #fff;
-  background: linear-gradient(120deg, #fff 30%, var(--accent-1) 50%, var(--accent-mid) 62%, #fff 80%);
+  color: var(--on-accent);
+  background: linear-gradient(120deg, var(--text-strong) 30%, var(--accent-1) 50%, var(--accent-mid) 62%, var(--text-strong) 80%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -65,7 +65,7 @@
   letter-spacing: -4px;
   line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, .35);
+  -webkit-text-stroke: 1.5px rgba(var(--ink-rgb), .35);
   font-variant-numeric: tabular-nums;
   user-select: none;
 }
@@ -82,7 +82,7 @@
   right: 0;
   bottom: 0;
   height: 3px;
-  background: rgba(255, 255, 255, .06);
+  background: rgba(var(--ink-rgb), .06);
 }
 
 .pre-bar {

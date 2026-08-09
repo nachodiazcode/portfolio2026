@@ -134,7 +134,7 @@ export const FULLSTACK_PROFILE: Profile = {
   experience: {
     eyebrow: 'Trayectoria',
     title: 'Experiencia Profesional',
-    description: 'Dieciséis hitos — roles y formación — contados desde el lado del servidor. Haz clic en una tarjeta para ver el detalle completo.',
+    description: 'Quince roles contados desde el lado del servidor. Haz clic en una tarjeta para ver el detalle completo.',
     jobs: JOBS_FULLSTACK
   },
 
@@ -147,5 +147,8 @@ export const FULLSTACK_PROFILE: Profile = {
     note: 'Hecho con Angular, Node y bastante café.'
   },
 
-  crossLink: { label: 'Ver mi universo Frontend & UX', route: '/' }
+  crossLinks: [
+    { label: 'Ver mi universo Frontend & UX', route: '/' },
+    { label: 'Ver mi cuaderno UX/UI', route: '/uxui' }
+  ]
 };
