@@ -59,7 +59,7 @@
 }
 
 .ufo-glint {
-  fill: #fff;
+  fill: var(--text-strong);
   opacity: .85;
 }
 

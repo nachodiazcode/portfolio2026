@@ -78,7 +78,7 @@ export const FRONTEND_PROFILE: Profile = {
     photoBadge: 'En una reunión, como casi siempre',
     stats: [
       { value: 15, suffix: '+', label: 'años en la web' },
-      { value: 16, label: 'hitos en la trayectoria' }
+      { value: 15, label: 'roles en la trayectoria' }
     ],
     dualLeft: 'Diseño',
     dualRight: 'Código',
@@ -126,7 +126,7 @@ export const FRONTEND_PROFILE: Profile = {
   experience: {
     eyebrow: 'Trayectoria',
     title: 'Experiencia Profesional',
-    description: 'Dieciséis hitos — roles y formación — ordenados del más reciente al más antiguo. Haz clic en una tarjeta para ver el detalle completo.',
+    description: 'Quince roles ordenados del más reciente al más antiguo. Haz clic en una tarjeta para ver el detalle completo.',
     jobs: JOBS
   },
 
@@ -139,5 +139,8 @@ export const FRONTEND_PROFILE: Profile = {
     note: 'Hecho con Angular, café y pocas horas de sueño.'
   },
 
-  crossLink: { label: 'Ver mi universo Full-Stack', route: '/fullstack' }
+  crossLinks: [
+    { label: 'Ver mi universo Full-Stack', route: '/fullstack' },
+    { label: 'Ver mi cuaderno UX/UI', route: '/uxui' }
+  ]
 };

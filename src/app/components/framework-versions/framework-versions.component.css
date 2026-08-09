@@ -25,7 +25,7 @@
 .versions-title {
   font-size: clamp(28px, 3.4vw, 40px);
   font-weight: 800;
-  color: #fff;
+  color: var(--text-strong);
   margin: 0 0 12px 0;
   letter-spacing: -1px;
   line-height: 1;
@@ -48,7 +48,7 @@
   background:
     radial-gradient(120% 130% at 0% 0%, color-mix(in srgb, var(--fw) 16%, transparent), transparent 52%),
     radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--fw) 9%, transparent), transparent 48%),
-    linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .012));
+    linear-gradient(180deg, rgba(var(--ink-rgb), .045), rgba(var(--ink-rgb), .012));
   box-shadow: 0 0 40px color-mix(in srgb, var(--fw) 12%, transparent);
   transition: box-shadow .5s ease, background .5s ease;
 }
@@ -59,7 +59,7 @@
   inset: 0;
   border-radius: 24px;
   padding: 1px;
-  background: linear-gradient(150deg, var(--fw), rgba(255, 255, 255, .08) 50%, color-mix(in srgb, var(--fw) 60%, transparent));
+  background: linear-gradient(150deg, var(--fw), rgba(var(--ink-rgb), .08) 50%, color-mix(in srgb, var(--fw) 60%, transparent));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -86,8 +86,8 @@
   gap: 8px;
   padding: 8px 16px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, .1);
-  background: rgba(255, 255, 255, .03);
+  border: 1px solid rgba(var(--ink-rgb), .1);
+  background: rgba(var(--ink-rgb), .03);
   color: var(--text-4);
   font-family: inherit;
   cursor: pointer;
@@ -101,7 +101,7 @@
 }
 
 .ft-tab.active {
-  color: #fff;
+  color: var(--text-strong);
   border-color: color-mix(in srgb, var(--fw) 55%, transparent);
   background: color-mix(in srgb, var(--fw) 15%, transparent);
   box-shadow: 0 6px 18px color-mix(in srgb, var(--fw) 20%, transparent);
@@ -139,7 +139,7 @@
   color: var(--text-7);
   padding-left: 9px;
   margin-left: 2px;
-  border-left: 1px solid rgba(255, 255, 255, .12);
+  border-left: 1px solid rgba(var(--ink-rgb), .12);
 }
 
 /* ===== Timeline horizontal ===== */
@@ -203,7 +203,7 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--text-strong);
   padding: 4px 8px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--fw) 60%, transparent);
@@ -240,7 +240,7 @@
 .ft-version {
   font-size: 15px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-strong);
   letter-spacing: -0.2px;
   line-height: 1.25;
 }

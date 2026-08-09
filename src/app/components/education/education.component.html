@@ -1,10 +1,10 @@
-<section id="educacion" style="position: relative; z-index: 1; padding: 64px var(--gutter) 88px; background: var(--bg-1); border-top: 1px solid rgba(255,255,255,.06);">
+<section id="educacion" style="position: relative; z-index: 1; padding: 64px var(--gutter) 88px; background: var(--bg-1); border-top: 1px solid rgba(var(--ink-rgb),.06);">
   <div style="max-width: 920px; margin: 0 auto;">
 
     <!-- Header -->
     <div appScrollReveal style="margin-bottom: 30px; max-width: 660px;">
       <div style="font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: linear-gradient(120deg,var(--accent-1),var(--accent-mid)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; margin-bottom: 10px;">Formación</div>
-      <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 10px; line-height: 1; color: #fff;">Educación</h2>
+      <h2 style="font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -1.5px; margin: 0 0 10px; line-height: 1; color: var(--text-strong);">Educación</h2>
       <p style="margin: 0; font-size: 16px; line-height: 1.6; color: var(--text-6);">La base técnica detrás de todo lo que construyo.</p>
     </div>
 
@@ -13,8 +13,8 @@
 
         <!-- Node: logo o birrete -->
         <div class="edu-node"
-             [style.background]="edu.logoUrl ? 'rgba(255, 255, 255, 0.05)' : 'linear-gradient(135deg,var(--accent-1),var(--accent-2))'"
-             [style.box-shadow]="edu.logoUrl ? '0 0 0 5px var(--bg-1), 0 0 0 6px rgba(255, 255, 255, 0.12)' : '0 0 0 5px var(--bg-1)'">
+             [style.background]="edu.logoUrl ? 'rgba(var(--ink-rgb), 0.05)' : 'linear-gradient(135deg,var(--accent-1),var(--accent-2))'"
+             [style.box-shadow]="edu.logoUrl ? '0 0 0 5px var(--bg-1), 0 0 0 6px rgba(var(--ink-rgb), 0.12)' : '0 0 0 5px var(--bg-1)'">
           <img *ngIf="edu.logoUrl" [src]="edu.logoUrl" alt="Logo de {{ edu.institution }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" loading="lazy" decoding="async">
           <svg *ngIf="!edu.logoUrl" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
         </div>
@@ -51,7 +51,7 @@
 
     <!-- Certificaciones -->
     <div appScrollReveal style="display: flex; align-items: center; gap: 16px; margin: 56px 0 28px;">
-      <h3 style="font-size: 22px; font-weight: 800; letter-spacing: -.5px; margin: 0; color: #fff;">Certificaciones</h3>
+      <h3 style="font-size: 22px; font-weight: 800; letter-spacing: -.5px; margin: 0; color: var(--text-strong);">Certificaciones</h3>
       <div style="width: 44px; height: 3px; background: linear-gradient(90deg,var(--accent-1),var(--accent-2)); border-radius: 999px;"></div>
     </div>
 
@@ -62,7 +62,7 @@
         <div class="cert-visual">
           <img *ngIf="cert.imageUrl" [src]="cert.imageUrl" alt="Certificado {{ cert.name }}" loading="lazy" decoding="async">
           <div *ngIf="!cert.imageUrl" class="cert-placeholder">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="rgba(var(--ink-rgb),.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
             <span>{{ cert.issuer }}</span>
           </div>
         </div>

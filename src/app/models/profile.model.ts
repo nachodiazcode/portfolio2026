@@ -45,10 +45,17 @@ export interface ContactInfo {
  * aquí: es idéntico en ambos universos y se queda en su componente.
  */
 export interface Profile {
-  id: 'frontend' | 'fullstack';
+  id: 'frontend' | 'fullstack' | 'uxui';
 
   /** Clase de tema aplicada al <body>. Vacío = paleta por defecto. */
   themeClass: string;
+
+  /**
+   * Hoja de fuentes propia del perfil, cargada solo al visitarlo. El tema
+   * cuaderno usa manuscritas que no aparecen en los otros dos; declararlas
+   * aquí evita cobrarle esa descarga a todo el mundo.
+   */
+  fontsHref?: string;
 
   meta: { title: string; description: string };
 
@@ -137,6 +144,7 @@ export interface Profile {
     note: string;
   };
 
-  /** Enlace discreto a la otra versión del portafolio. */
-  crossLink: { label: string; route: string };
+  /** Enlaces a los otros perfiles. Con tres universos, uno solo dejaba
+   *  siempre a un tercero inalcanzable desde el pie de página. */
+  crossLinks: { label: string; route: string }[];
 }
