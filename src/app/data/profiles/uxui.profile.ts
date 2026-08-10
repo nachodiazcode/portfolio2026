@@ -37,7 +37,9 @@ export const UXUI_PROFILE: Profile = {
   hero: {
     badge: 'Disponible para nuevos proyectos',
     firstName: 'Ignacio',
-    lastName: 'Díaz',
+    // Titular a una sola línea: el apellido ya está en la barra superior, en
+    // el preloader y en el pie, y repetirlo en grande le quitaba aire al hero.
+    lastName: '',
     subtitleLead: 'Diseñador que aprendió a programar',
     flipWords: ['UX / UI', 'Research', 'Design Systems', 'Prototipado', 'UX / UI'],
     bio: 'Empecé dibujando interfaces y terminé programándolas. Esa vuelta me dejó una manía útil: no propongo una pantalla sin saber cómo se va a construir, ni escribo un componente sin preguntarme a quién le va a tocar usarlo. Todo esto empieza en un cuaderno.',
