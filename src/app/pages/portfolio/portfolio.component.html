@@ -53,8 +53,10 @@
 
     <div appScrollFade style="position: relative; z-index: 1; width: 100%; max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 60px;">
 
-      <!-- Text Bio -->
-      <div style="flex: 1 1 440px; min-width: 320px;">
+      <!-- Text Bio. hero-copy/hero-bio/hero-actions no cambian nada por sí
+           solos: son ganchos para que el tema cuaderno reordene y recalibre
+           esta columna sin tocar los otros dos perfiles. -->
+      <div class="hero-copy" style="flex: 1 1 440px; min-width: 320px;">
         <div appScrollReveal class="status-badge">
           <span class="pulse-dot"></span>
           {{ profile.hero.badge }}
@@ -71,14 +73,14 @@
             <span *ngFor="let w of profile.hero.flipWords">{{ w }}</span>
           </span></span>
         </p>
-        <p appScrollReveal style="font-size: 16px; line-height: 1.65; color: var(--text-6); margin: 0 0 28px; max-width: 480px; text-wrap: pretty;">
+        <p appScrollReveal class="hero-bio" style="font-size: 16px; line-height: 1.65; color: var(--text-6); margin: 0 0 28px; max-width: 480px; text-wrap: pretty;">
           {{ profile.hero.bio }}
         </p>
         <div appScrollReveal class="location-text">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
           {{ profile.contact.location }}
         </div>
-        <div appScrollReveal style="display: flex; flex-wrap: wrap; gap: 14px;">
+        <div appScrollReveal class="hero-actions" style="display: flex; flex-wrap: wrap; gap: 14px;">
           <a appMagnetic [routerLink]="[]" [fragment]="profile.hero.ctaPrimary.fragment" (mouseenter)="playHover()" (click)="goTo(profile.hero.ctaPrimary.fragment)" class="btn-primary">
             {{ profile.hero.ctaPrimary.label }}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
