@@ -17,7 +17,7 @@ export const UXUI_PROFILE: Profile = {
   themeClass: 'theme-sketch',
 
   // Manuscritas del tema, cargadas solo al visitar este perfil.
-  fontsHref: 'https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Architects+Daughter&display=swap',
+  fontsHref: 'https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Caveat:wght@400;500;600;700&display=swap',
 
   meta: {
     title: 'Ignacio Díaz · Diseñador UX/UI',
@@ -37,9 +37,7 @@ export const UXUI_PROFILE: Profile = {
   hero: {
     badge: 'Disponible para nuevos proyectos',
     firstName: 'Ignacio',
-    // Titular a una sola línea: el apellido ya está en la barra superior, en
-    // el preloader y en el pie, y repetirlo en grande le quitaba aire al hero.
-    lastName: '',
+    lastName: 'Díaz',
     subtitleLead: 'Diseñador que aprendió a programar',
     flipWords: ['UX / UI', 'Research', 'Design Systems', 'Prototipado', 'UX / UI'],
     bio: 'Empecé dibujando interfaces y terminé programándolas. Esa vuelta me dejó una manía útil: no propongo una pantalla sin saber cómo se va a construir, ni escribo un componente sin preguntarme a quién le va a tocar usarlo. Todo esto empieza en un cuaderno.',

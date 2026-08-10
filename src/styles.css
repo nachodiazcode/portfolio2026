@@ -353,13 +353,13 @@ body.theme-sketch {
   --text-8: #A8A29E;
   --text-strong: #1C1917;
 
-  --font-data: 'Architects Daughter', 'Comic Sans MS', cursive;
+  --font-data: 'Patrick Hand', 'Comic Sans MS', cursive;
 
   /* Manuscritas del tema. Las dos son de rotulador técnico, no de firma:
      es la letra de quien anota un wireframe, no la de quien firma una carta.
      Caveat queda solo para el guiño de la firma en el preloader. */
-  --font-hand: 'Architects Daughter', 'Comic Sans MS', cursive;
-  --font-sketch: 'Architects Daughter', 'Comic Sans MS', cursive;
+  --font-hand: 'Patrick Hand', 'Comic Sans MS', cursive;
+  --font-sketch: 'Patrick Hand', 'Comic Sans MS', cursive;
   --font-signature: 'Caveat', 'Segoe Script', cursive;
 
   /* El papel cuadriculado. Dos capas de líneas de 1px sobre el crema. */
@@ -392,14 +392,14 @@ body.theme-sketch .pre-name {
   font-family: var(--font-signature);
 }
 
-/* Architects Daughter tiene la caja más ancha y la altura de x mayor que
-   Caveat, así que el mismo tamaño desborda. Se baja y se aprieta el
-   interletrado, que en esta fuente viene suelto. */
+/* Patrick Hand es más estrecha y de trazo más fino que la sans original, así
+   que a igual tamaño se ve más liviana; el interletrado se aprieta un poco
+   porque en esta fuente viene suelto. */
 body.theme-sketch .hero-name {
-  font-size: clamp(52px, 8.5vw, 104px);
+  font-size: clamp(40px, 6vw, 74px);
   font-weight: 400;
   line-height: 1.02;
-  letter-spacing: -2px;
+  letter-spacing: -1.5px;
 }
 
 body.theme-sketch h2 {
@@ -658,4 +658,47 @@ body.theme-sketch .stack-card:has(.stack-logos) .stack-ico {
   body.theme-sketch .stack-logos {
     gap: 10px;
   }
+}
+
+/* ── El titular, en una sola línea ──────────────────────────────────────
+   El hero apila nombre y apellido en dos líneas: con la tipografía de
+   display original eso es un recurso gráfico, pero con la manuscrita
+   —más pequeña y más ancha— se leía como un salto de línea a medias.
+   Aquí van seguidos, y solo caen a dos líneas si no caben.
+
+   Las máscaras traen margen y relleno horizontal negativos para que el aura
+   difuminada del nombre no se recorte; en fila eso las haría solaparse, así
+   que en este tema se anulan (aquí no hay aura que proteger). */
+body.theme-sketch .hero-name {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: .26em;
+}
+
+body.theme-sketch .line-mask {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* El apellido lleva un gradiente de acento y, detrás, un aura con blur de
+   22px. Sobre un fondo oscuro eso es un resplandor; sobre papel es una
+   mancha gris, y además deja "Díaz" más claro que "Ignacio". Un lápiz
+   escribe en un solo tono: las dos palabras van en la misma tinta. */
+body.theme-sketch .hero-line-2 {
+  background: none !important;
+  -webkit-text-fill-color: var(--text-strong) !important;
+  color: var(--text-strong) !important;
+  /* Ojo: NO redeclarar aquí la animación. Angular renombra los @keyframes con
+     un prefijo por componente (_ngcontent-xxx_heroLineUp), así que una regla
+     global que pida "heroLineUp" apunta a una animación inexistente: la línea
+     se queda en su translateY inicial y el apellido desaparece bajo la
+     máscara. Se deja la del componente; gradientFlow sigue corriendo pero no
+     pinta nada porque el fondo ya es none. */
+}
+
+body.theme-sketch .hero-line-2::after {
+  display: none;
 }
