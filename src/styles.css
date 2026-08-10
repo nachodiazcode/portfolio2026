@@ -357,10 +357,14 @@ body.theme-sketch {
 
   /* Manuscritas del tema. Las dos son de rotulador técnico, no de firma:
      es la letra de quien anota un wireframe, no la de quien firma una carta.
-     Caveat queda solo para el guiño de la firma en el preloader. */
+     La script queda para el nombre y la firma del preloader. */
+  /* Dos manuscritas con papeles distintos: la script luce en el nombre, la
+     de rotulador se lee de corrido en todo lo demás. Poner la script también
+     en los títulos de sección hace que "Experiencia Profesional" se lea
+     lento, que es justo lo que un portafolio no puede permitirse. */
   --font-hand: 'Patrick Hand', 'Comic Sans MS', cursive;
   --font-sketch: 'Patrick Hand', 'Comic Sans MS', cursive;
-  --font-signature: 'Caveat', 'Segoe Script', cursive;
+  --font-signature: 'Dancing Script', 'Segoe Script', cursive;
 
   /* El papel cuadriculado. Dos capas de líneas de 1px sobre el crema. */
   background-color: var(--bg-0);
@@ -385,8 +389,8 @@ body.theme-sketch .filosofia-watermark {
   letter-spacing: 0;
 }
 
-/* Caveat es más estrecha y baja que Inter: sin subirle el tamaño y el peso
-   los títulos se ven anémicos donde antes había una tipografía de 800. */
+/* La manuscrita es más liviana que la sans de 800 que había antes: sin
+   subirle el tamaño los títulos se ven anémicos. */
 /* La firma del preloader sí se queda en cursiva */
 body.theme-sketch .pre-name {
   font-family: var(--font-signature);
@@ -395,11 +399,16 @@ body.theme-sketch .pre-name {
 /* Patrick Hand es más estrecha y de trazo más fino que la sans original, así
    que a igual tamaño se ve más liviana; el interletrado se aprieta un poco
    porque en esta fuente viene suelto. */
+/* El titular y la firma del preloader van en la script. Dancing Script tiene
+   ascendentes y descendentes largos y una altura de x pequeña, así que pide
+   más tamaño, más interlínea y nada de tracking negativo: apretarla le come
+   las ligaduras. */
 body.theme-sketch .hero-name {
-  font-size: clamp(40px, 6vw, 74px);
-  font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -1.5px;
+  font-family: var(--font-signature);
+  font-size: clamp(52px, 7.5vw, 94px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0;
 }
 
 body.theme-sketch h2 {
