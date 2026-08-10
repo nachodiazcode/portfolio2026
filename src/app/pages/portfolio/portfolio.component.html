@@ -61,7 +61,9 @@
         </div>
         <h1 class="hero-name">
           <span class="line-mask"><span class="hero-line hero-line-1">{{ profile.hero.firstName }}</span></span>
-          <span class="line-mask"><span class="hero-line hero-line-2" [attr.data-text]="profile.hero.lastName">{{ profile.hero.lastName }}</span></span>
+          <!-- El apellido es opcional: un perfil puede dejarlo vacío y quedarse
+               con el titular a una sola línea. -->
+          <span *ngIf="profile.hero.lastName" class="line-mask"><span class="hero-line hero-line-2" [attr.data-text]="profile.hero.lastName">{{ profile.hero.lastName }}</span></span>
         </h1>
         <p appScrollReveal class="hero-subtitle">
           {{ profile.hero.subtitleLead }} <span style="color: var(--text-8);">·</span>
