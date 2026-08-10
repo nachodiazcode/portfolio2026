@@ -1,5 +1,6 @@
 import { Job } from './job.model';
 import { Project } from './project.model';
+import { BrandSlug } from '../components/brand-logo/brand-logo.component';
 
 /** Iconos disponibles para las tarjetas de la sección Stack. */
 export type StackIcon = 'code' | 'server' | 'database' | 'cloud' | 'design';
@@ -7,6 +8,12 @@ export type StackIcon = 'code' | 'server' | 'database' | 'cloud' | 'design';
 export interface StackCard {
   icon: StackIcon;
   title: string;
+  /**
+   * Marcas que encabezan la tarjeta, dibujadas en su color. Solo se pintan en
+   * el tema cuaderno: es ahí donde el color de marca contrasta contra el
+   * grafito. En los temas oscuros la tarjeta sigue con su icono de línea.
+   */
+  logos?: BrandSlug[];
   /** Par de colores de la tarjeta; se inyectan como --card-1 / --card-2. */
   tone: [string, string];
   /** El primero puede marcarse como destacado. */
