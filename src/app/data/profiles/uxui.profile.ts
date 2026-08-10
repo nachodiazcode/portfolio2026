@@ -38,9 +38,13 @@ export const UXUI_PROFILE: Profile = {
     badge: 'Disponible para nuevos proyectos',
     firstName: 'Ignacio',
     lastName: 'Díaz',
-    subtitleLead: 'Diseñador que aprendió a programar',
+    // Distinta de la del perfil Frontend a propósito: cada universo tiene su
+    // propio ángulo, igual que Full-Stack con "Del modelo de datos al deploy".
+    subtitleLead: 'Primero el papel, después el pixel',
     flipWords: ['UX / UI', 'Research', 'Design Systems', 'Prototipado', 'UX / UI'],
-    bio: 'Empecé dibujando interfaces y terminé programándolas. Esa vuelta me dejó una manía útil: no propongo una pantalla sin saber cómo se va a construir, ni escribo un componente sin preguntarme a quién le va a tocar usarlo. Todo esto empieza en un cuaderno.',
+    // Acortada: la versión anterior eran 3 frases: por qué empecé, mi manía y
+    // la metáfora del cuaderno. Esta cierra con la misma idea en dos.
+    bio: 'Empecé dibujando interfaces y terminé programándolas. Por eso no propongo una pantalla sin saber cómo se construye — y por eso todo esto empieza en una hoja como esta.',
 
     /*
      * Para el retrato ilustrado: deja el archivo en public/ (por ejemplo
