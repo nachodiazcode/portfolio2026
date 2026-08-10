@@ -17,7 +17,7 @@ export const UXUI_PROFILE: Profile = {
   themeClass: 'theme-sketch',
 
   // Manuscritas del tema, cargadas solo al visitar este perfil.
-  fontsHref: 'https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Caveat:wght@400;500;600;700&display=swap',
+  fontsHref: 'https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Dancing+Script:wght@400;600;700&display=swap',
 
   meta: {
     title: 'Ignacio Díaz · Diseñador UX/UI',
