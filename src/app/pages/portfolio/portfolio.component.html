@@ -267,6 +267,12 @@
             </div>
             <span class="stack-count">{{ pad(card.items.length) }}</span>
           </div>
+          <!-- Logos de marca. El CSS los oculta salvo en el tema cuaderno:
+               ahí el color contrasta contra el grafito, como calcomanías
+               pegadas en la hoja. -->
+          <div *ngIf="card.logos?.length" class="stack-logos">
+            <app-brand-logo *ngFor="let l of card.logos" [slug]="l" [size]="40"></app-brand-logo>
+          </div>
           <div class="stack-pills">
             <span *ngFor="let it of card.items" class="stack-pill" [class.stack-pill--primary]="it.primary">{{ it.label }}</span>
           </div>

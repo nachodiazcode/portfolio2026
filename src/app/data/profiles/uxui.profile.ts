@@ -115,6 +115,7 @@ export const UXUI_PROFILE: Profile = {
     cards: [
       {
         icon: 'design', title: 'Diseño & UI', tone: ['var(--accent-1)', 'var(--accent-soft)'],
+        logos: ['figma'],
         items: [
           { label: 'Figma', primary: true }, { label: 'Design Systems' }, { label: 'Prototipado' },
           { label: 'Wireframing' }, { label: 'Diseño de interacción' }, { label: 'Accesibilidad' }
@@ -129,6 +130,7 @@ export const UXUI_PROFILE: Profile = {
       },
       {
         icon: 'server', title: 'Puente con desarrollo', tone: ['var(--accent-mid)', 'var(--accent-1)'],
+        logos: ['html5', 'css3', 'javascript', 'typescript', 'angular'],
         items: [
           { label: 'Angular', primary: true }, { label: 'HTML5 / CSS' }, { label: 'TypeScript' },
           { label: 'Tokens de diseño' }, { label: 'Handoff' }

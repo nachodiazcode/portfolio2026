@@ -17,6 +17,7 @@ import { StackBackgroundComponent } from '../../components/stack-background/stac
 import { PreloaderComponent } from '../../components/preloader/preloader.component';
 import { FrameworkVersionsComponent } from '../../components/framework-versions/framework-versions.component';
 import { ProjectsComponent } from '../../components/projects/projects.component';
+import { BrandLogoComponent } from '../../components/brand-logo/brand-logo.component';
 
 import { WordRevealDirective } from '../../directives/word-reveal.directive';
 import { TiltDirective } from '../../directives/tilt.directive';
@@ -63,7 +64,8 @@ import { FRONTEND_PROFILE } from '../../data/profiles/frontend.profile';
     ScrollFadeDirective,
     CountUpDirective,
     SpotlightDirective,
-    ScrollRevealDirective
+    ScrollRevealDirective,
+    BrandLogoComponent
   ],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
