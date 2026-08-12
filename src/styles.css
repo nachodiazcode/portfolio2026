@@ -140,19 +140,42 @@ html {
   background: var(--bg-0);
 }
 
-/* Deja aire para el navbar flotante al navegar por anclas (#educacion, #stack, etc.) */
+/* ── Aire al navegar por anclas ─────────────────────────────────────────
+   El navbar flota y ocupa hasta y≈90px, así que un ancla sin margen deja
+   el título debajo de él. Estos valores están calibrados midiendo dónde
+   cae el primer texto real de cada sección en los tres perfiles (uxui,
+   frontend y fullstack) a 1680x1050: el objetivo es ~100px de aire entre
+   el borde inferior del navbar y el "eyebrow" de la sección.
+
+   No son todos iguales porque cada sección tiene su propio padding
+   interno: el margen compensa esa diferencia para que al hacer clic todas
+   aterricen a la misma altura. Si cambias el padding de una sección, hay
+   que volver a medir la suya. */
 section[id],
 header[id],
 footer[id] {
   scroll-margin-top: 96px;
 }
 
-/* Educación tiene harto padding interno: el scroll baja un poco más */
+/* Educación: su padding interno es mucho menor, el ancla caía a 14px del
+   navbar — prácticamente pegada. */
 #educacion {
-  scroll-margin-top: 40px;
+  scroll-margin-top: 125px;
 }
 
-/* Filosofía: el contenido arranca alto, deja menos margen al anclar */
+/* Sobre mí: mismo caso, caía a ~58px. */
+#sobre-mi {
+  scroll-margin-top: 137px;
+}
+
+/* Testimonios: caía a ~93px, solo le faltaba un pelo. */
+#testimonios {
+  scroll-margin-top: 102px;
+}
+
+/* Filosofía arranca con un bloque decorativo alto, así que con menos
+   margen ya aterriza con 107-124px de aire. Bajarlo más no gana nada y
+   arriesga que el título toque el navbar en viewports chicos. */
 #filosofia {
   scroll-margin-top: 60px;
 }
