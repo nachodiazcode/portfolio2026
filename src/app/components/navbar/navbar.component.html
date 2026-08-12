@@ -5,7 +5,7 @@
   <div class="dock-container">
     
     <!-- Logo / Nombre -->
-    <a [routerLink]="[]" fragment="inicio" class="dock-brand" (mouseenter)="playHover()" (click)="playClick()">
+    <a [routerLink]="[]" fragment="inicio" class="dock-brand" (mouseenter)="playHover()" (click)="goTo('inicio')">
       <div class="brand-avatar">
         <img [src]="photo" [alt]="brandName" />
       </div>

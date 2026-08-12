@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -70,7 +70,7 @@ import { FRONTEND_PROFILE } from '../../data/profiles/frontend.profile';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements OnInit, OnDestroy {
+export class PortfolioComponent implements OnInit, AfterViewInit, OnDestroy {
   profile: Profile = FRONTEND_PROFILE;
   jobs: Job[] = [];
   selectedJob: Job | null = null;
@@ -113,6 +113,17 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
     this.updateClock();
     this.clockTimer = setInterval(() => this.updateClock(), 30000);
+  }
+
+  ngAfterViewInit(): void {
+    // El anchorScrolling del Router está apagado (ver app.config.ts), así que
+    // un deep-link con fragmento (/uxui#educacion) no aterriza solo. El
+    // preloader bloquea el scroll (body.style.overflow='hidden') durante
+    // ~650ms, así que hay que esperar a que libere antes de intentarlo.
+    const fragment = this.route.snapshot.fragment;
+    if (fragment) {
+      setTimeout(() => this.scroller.scrollToFragment(fragment), 700);
+    }
   }
 
   ngOnDestroy(): void {

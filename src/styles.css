@@ -141,36 +141,40 @@ html {
 }
 
 /* ── Aire al navegar por anclas ─────────────────────────────────────────
-   El navbar flota y ocupa hasta y≈90px, así que un ancla sin margen deja
-   el título debajo de él. Estos valores están calibrados midiendo dónde
-   cae el primer texto real de cada sección en los tres perfiles (uxui,
-   frontend y fullstack) a 1680x1050: el objetivo es ~100px de aire entre
-   el borde inferior del navbar y el "eyebrow" de la sección.
+   El navbar flota y ocupa hasta y≈76-92px (varía un poco con la
+   profundidad del scroll), así que un ancla sin margen deja el título
+   debajo de él. El objetivo es un aire chico (~30-70px) entre el borde
+   inferior del navbar y el "eyebrow" de la sección — lo justo para
+   respirar sin dejar una franja vacía arriba.
 
    No son todos iguales porque cada sección tiene su propio padding
-   interno: el margen compensa esa diferencia para que al hacer clic todas
-   aterricen a la misma altura. Si cambias el padding de una sección, hay
-   que volver a medir la suya. */
+   interno antes del eyebrow: el margen compensa esa diferencia. La
+   fórmula es scroll-margin = aire_objetivo + altura_navbar - offset_interno,
+   con offset_interno = distancia real del top de la sección a su eyebrow
+   (medida con el elemento exacto — apuntar a "el primer texto que
+   aparezca" da falsos positivos: agarra el nodo decorativo más alto en
+   vez del eyebrow real, y el cálculo sale corto). Si cambias el padding
+   de una sección, hay que volver a medir la suya. */
 section[id],
 header[id],
 footer[id] {
   scroll-margin-top: 96px;
 }
 
-/* Educación: su padding interno es mucho menor, el ancla caía a 14px del
-   navbar — prácticamente pegada. */
+/* Educación: offset interno 65px (vs. navbar 92px) — sin ajuste el eyebrow
+   quedaba pegado al navbar. */
 #educacion {
-  scroll-margin-top: 125px;
+  scroll-margin-top: 80px;
 }
 
-/* Sobre mí: mismo caso, caía a ~58px. */
+/* Sobre mí: offset interno 90px. */
 #sobre-mi {
-  scroll-margin-top: 137px;
+  scroll-margin-top: 55px;
 }
 
-/* Testimonios: caía a ~93px, solo le faltaba un pelo. */
+/* Testimonios: offset interno 88px, casi igual a Sobre mí. */
 #testimonios {
-  scroll-margin-top: 102px;
+  scroll-margin-top: 55px;
 }
 
 /* Filosofía arranca con un bloque decorativo alto, así que con menos
