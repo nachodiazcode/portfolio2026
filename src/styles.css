@@ -366,14 +366,17 @@ body.theme-sketch {
   --font-sketch: 'Patrick Hand', 'Comic Sans MS', cursive;
   --font-signature: 'Dancing Script', 'Segoe Script', cursive;
 
-  /* El papel cuadriculado. Dos capas de líneas de 1px sobre el crema, con
-     las medidas calcadas de una hoja real: celda de 19.5px al 4.4% de tinta.
-     La celda chica es lo que lo hace leer como cuaderno y no como grilla de
-     diseño. En los cruces las dos capas se suman y el alpha sube a ~8%. */
+  /* El papel cuadriculado. Dos capas de líneas de 1px sobre el crema. La
+     celda de 19.5px sale de medir una hoja real; la celda chica es lo que
+     lo hace leer como cuaderno y no como grilla de diseño.
+     El trazo va al 7%, por encima del 4.4% de esa hoja: en pantalla la
+     retícula compite con el texto y los bordes dibujados, así que el valor
+     del papel se queda corto y desaparece. En los cruces las dos capas se
+     suman y el alpha efectivo llega a ~13.5%. */
   background-color: var(--bg-0);
   background-image:
-    linear-gradient(rgba(var(--ink-rgb), .044) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--ink-rgb), .044) 1px, transparent 1px);
+    linear-gradient(rgba(var(--ink-rgb), .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--ink-rgb), .07) 1px, transparent 1px);
   background-size: 19.5px 19.5px;
   color: var(--text-2);
 }
