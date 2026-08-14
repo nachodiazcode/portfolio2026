@@ -54,10 +54,10 @@
   max-width: 1400px;
   margin: 0 auto;
   min-height: 100%;
-  padding: 108px var(--gutter) 48px;
+  padding: 84px var(--gutter) 110px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* El overlay ocupa la ventana entera: si los 8 enlaces más el panel de
@@ -74,7 +74,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 80px;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -90,12 +90,12 @@
 
 @media (max-width: 560px) {
   .menu-content-wrapper {
-    padding: 96px var(--gutter) 40px;
+    padding: 80px var(--gutter) 60px;
     justify-content: flex-start;
   }
 
   .nav-title {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .menu-link {
@@ -110,14 +110,14 @@
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--text-7);
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   display: block;
 }
 
 .fullscreen-nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .menu-link {
