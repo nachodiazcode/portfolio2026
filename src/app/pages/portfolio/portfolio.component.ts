@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -70,7 +70,7 @@ import { FRONTEND_PROFILE } from '../../data/profiles/frontend.profile';
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements OnInit, OnDestroy {
+export class PortfolioComponent implements OnInit, OnDestroy, AfterViewInit {
   profile: Profile = FRONTEND_PROFILE;
   jobs: Job[] = [];
   selectedJob: Job | null = null;
@@ -113,6 +113,22 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
     this.updateClock();
     this.clockTimer = setInterval(() => this.updateClock(), 30000);
+  }
+
+  ngAfterViewInit(): void {
+    const frag = this.route.snapshot.fragment || location.hash.replace('#', '');
+    const targets: Record<string, number> = {
+      'filosofia': 888,
+      'sobre-mi': 1726,
+      'stack': 2407,
+      'proyectos': 3102,
+      'educacion': 5907,
+      'formacion': 5907,
+      'contacto': 11315
+    };
+    if (targets[frag] !== undefined) {
+      setTimeout(() => this.scroller.scrollToExact(targets[frag], 300), 200);
+    }
   }
 
   ngOnDestroy(): void {

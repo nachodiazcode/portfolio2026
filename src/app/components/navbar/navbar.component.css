@@ -304,3 +304,58 @@ nav.shrunk {
 .btn-burger:hover .burger-line:last-child {
   width: 15px;
 }
+
+/* Medidor de scrollY flotante */
+.scroll-y-meter {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(var(--bg-2-rgb, 21, 16, 30), 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(var(--accent-1-rgb, 251, 37, 118), 0.4);
+  border-radius: 999px;
+  color: var(--text-1, #ffffff);
+  font-family: var(--font-data, ui-monospace, monospace);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(var(--accent-1-rgb, 251, 37, 118), 0.25);
+  user-select: none;
+  pointer-events: auto;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-y-meter:hover {
+  border-color: var(--accent-1, #FB2576);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 0 0 22px rgba(var(--accent-1-rgb, 251, 37, 118), 0.45);
+}
+
+.meter-icon {
+  font-size: 14px;
+}
+
+.meter-label {
+  color: var(--text-4, #A39BB0);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.meter-value {
+  color: var(--accent-1, #FB2576);
+  font-weight: 700;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  min-width: 48px;
+}
+
+.meter-value.highlight-888 {
+  color: #00ff88 !important;
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.9);
+}

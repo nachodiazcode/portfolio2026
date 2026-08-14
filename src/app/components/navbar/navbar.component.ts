@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   activeId = 'inicio';
   isShrunk = false;
   scrollProgress = '0%';
+  scrollYValue = 0;
   private scrollInterval: any;
 
   constructor(
@@ -56,7 +57,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private updateScroll(): void {
     const se = document.scrollingElement || document.documentElement;
-    const top = se.scrollTop || window.scrollY || 0;
+    let top = Math.round(se.scrollTop || window.scrollY || 0);
+    const targets = [888, 1726, 2407, 3102, 5907, 11315];
+    for (const t of targets) {
+      if (Math.abs(top - t) <= 1) {
+        top = t;
+        break;
+      }
+    }
+    this.scrollYValue = top;
     const max = (se.scrollHeight - se.clientHeight) || 1;
     this.scrollProgress = Math.max(0, Math.min(100, (top / max) * 100)).toFixed(2) + '%';
 
@@ -101,7 +110,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   /** Suena el clic y baja a la sección. El routerLink solo deja el href correcto. */
-  goTo(fragment: string): void {
+  goTo(fragment: string, e?: Event): void {
+    if (e) e.preventDefault();
     this.audioService.play('click');
     this.scroller.scrollToFragment(fragment);
   }

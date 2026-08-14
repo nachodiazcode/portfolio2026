@@ -15,14 +15,14 @@
     <!-- Enlaces Principales (Solo Desktop) -->
     <div class="dock-links desktop-only">
       <div class="dock-indicator" aria-hidden="true"></div>
-      <a [routerLink]="[]" fragment="inicio" (mouseenter)="playHover()" (click)="goTo('inicio')" [ngClass]="{'active': activeId === 'inicio'}" class="dock-link">Inicio</a>
-      <a [routerLink]="[]" fragment="filosofia" (mouseenter)="playHover()" (click)="goTo('filosofia')" [ngClass]="{'active': activeId === 'filosofia'}" class="dock-link">Filosofía</a>
-      <a [routerLink]="[]" fragment="sobre-mi" (mouseenter)="playHover()" (click)="goTo('sobre-mi')" [ngClass]="{'active': activeId === 'sobre-mi'}" class="dock-link">Sobre mí</a>
-      <a [routerLink]="[]" fragment="stack" (mouseenter)="playHover()" (click)="goTo('stack')" [ngClass]="{'active': activeId === 'stack'}" class="dock-link">Stack</a>
-      <a [routerLink]="[]" fragment="proyectos" (mouseenter)="playHover()" (click)="goTo('proyectos')" [ngClass]="{'active': activeId === 'proyectos'}" class="dock-link">Proyectos</a>
-      <a [routerLink]="[]" fragment="experiencia" (mouseenter)="playHover()" (click)="goTo('experiencia')" [ngClass]="{'active': activeId === 'experiencia'}" class="dock-link">Experiencia</a>
-      <a [routerLink]="[]" fragment="educacion" (mouseenter)="playHover()" (click)="goTo('educacion')" [ngClass]="{'active': activeId === 'educacion'}" class="dock-link">Educación</a>
-      <a [routerLink]="[]" fragment="contacto" (mouseenter)="playHover()" (click)="goTo('contacto')" [ngClass]="{'active': activeId === 'contacto'}" class="dock-link">Contacto</a>
+      <a [routerLink]="[]" fragment="inicio" (mouseenter)="playHover()" (click)="goTo('inicio', $event)" [ngClass]="{'active': activeId === 'inicio'}" class="dock-link">Inicio</a>
+      <a [routerLink]="[]" fragment="filosofia" (mouseenter)="playHover()" (click)="goTo('filosofia', $event)" [ngClass]="{'active': activeId === 'filosofia'}" class="dock-link">Filosofía</a>
+      <a [routerLink]="[]" fragment="sobre-mi" (mouseenter)="playHover()" (click)="goTo('sobre-mi', $event)" [ngClass]="{'active': activeId === 'sobre-mi'}" class="dock-link">Sobre mí</a>
+      <a [routerLink]="[]" fragment="stack" (mouseenter)="playHover()" (click)="goTo('stack', $event)" [ngClass]="{'active': activeId === 'stack'}" class="dock-link">Stack</a>
+      <a [routerLink]="[]" fragment="proyectos" (mouseenter)="playHover()" (click)="goTo('proyectos', $event)" [ngClass]="{'active': activeId === 'proyectos'}" class="dock-link">Proyectos</a>
+      <a [routerLink]="[]" fragment="experiencia" (mouseenter)="playHover()" (click)="goTo('experiencia', $event)" [ngClass]="{'active': activeId === 'experiencia'}" class="dock-link">Experiencia</a>
+      <a [routerLink]="[]" fragment="educacion" (mouseenter)="playHover()" (click)="goTo('educacion', $event)" [ngClass]="{'active': activeId === 'educacion'}" class="dock-link">Educación</a>
+      <a [routerLink]="[]" fragment="contacto" (mouseenter)="playHover()" (click)="goTo('contacto', $event)" [ngClass]="{'active': activeId === 'contacto'}" class="dock-link">Contacto</a>
     </div>
 
     <!-- Redes Sociales y Acciones -->
@@ -64,3 +64,10 @@
     </div>
   </div>
 </nav>
+
+<!-- Medidor de scrollY flotante -->
+<div class="scroll-y-meter" title="Medidor de scrollY en tiempo real">
+  <span class="meter-icon">📍</span>
+  <span class="meter-label">scrollY:</span>
+  <span class="meter-value" [class.highlight-888]="scrollYValue === 888 || scrollYValue === 1726 || scrollYValue === 2407 || scrollYValue === 3102 || scrollYValue === 5907 || scrollYValue === 11315">{{ scrollYValue }}px</span>
+</div>
