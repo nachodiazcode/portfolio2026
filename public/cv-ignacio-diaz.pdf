@@ -1,19 +1,74 @@
 %PDF-1.4
-1 0 obj <\/Type \/Catalog \/Pages 2 0 R>> endobj
-2 0 obj <\/Type \/Pages \/Kids [3 0 R] \/Count 1>> endobj
-3 0 obj <\/Type \/Page \/Parent 2 0 R \/MediaBox [0 0 595 842] \/Resources <<>> \/Contents 4 0 R>> endobj
-4 0 obj <\/Length 44>> stream
-BT \/F1 24 Tf 100 700 Td (CV Ignacio Diaz) Tj ET
-endstream
+%“Œ‹ž ReportLab Generated PDF document (opensource)
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/Contents 8 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 7 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 /Trans <<
+
+>> 
+  /Type /Page
+>>
+endobj
+5 0 obj
+<<
+/PageMode /UseNone /Pages 7 0 R /Type /Catalog
+>>
+endobj
+6 0 obj
+<<
+/Author (Ignacio Diaz) /CreationDate (D:20260914154128-03'00') /Creator (anonymous) /Keywords () /ModDate (D:20260914154128-03'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (Curriculum vitae) /Title (CV Ignacio Diaz) /Trapped /False
+>>
+endobj
+7 0 obj
+<<
+/Count 1 /Kids [ 4 0 R ] /Type /Pages
+>>
+endobj
+8 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 302
+>>
+stream
+GarW4:J1dU%)q],.GdY'kW"tpRE<uo7IXhXn[d6;]$fDgV',QtSSf5o,(W<4OS=)._3CVWh/pG,`q>3S(3p;Yg*8iA/h:e/=CPrRUCU<Z*t!sdlDNS`6/*4nacfIk'#kjEL!gSnZ%Ef69^-;K2L%4j:+QdB%P6d"c`GQmfiGJ9DUuuOcBg2/B_lJm%_-AVY7'D%jMbYkB7k#0nqG+n8GIu3cVAsL`go)iETm.>s+W<l^Z#UdWo(9c1L+DbhX9[d>U_N#cnt4SO,&"l<t:ka3(9973(eB;0rOIMCBaA?1nI\l~>endstream
 endobj
 xref
-0 5
-0000000000 65535 f
-0000000009 00000 n
-0000000056 00000 n
-0000000111 00000 n
-0000000212 00000 n
-trailer <\/Size 5 \/Root 1 0 R>>
+0 9
+0000000000 65535 f 
+0000000061 00000 n 
+0000000102 00000 n 
+0000000209 00000 n 
+0000000321 00000 n 
+0000000524 00000 n 
+0000000592 00000 n 
+0000000868 00000 n 
+0000000927 00000 n 
+trailer
+<<
+/ID 
+[<10ed797a9d53404de801e8b07bbd4335><10ed797a9d53404de801e8b07bbd4335>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 6 0 R
+/Root 5 0 R
+/Size 9
+>>
 startxref
-306
+1319
 %%EOF
